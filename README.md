@@ -1,4 +1,4 @@
 richardrflores.github.io
 ========================
 
-My Personal Blog
+My User Page
