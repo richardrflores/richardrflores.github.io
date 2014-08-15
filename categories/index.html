@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<div>
+  <div>
+    {% for category in site.categories %}
+      <a href="#{{ category | first }}" name="{{ category | first }}">{{ category | first }}</a> •
+    {% endfor %}
+  </div>
+  <hr/>
+  <div>
+    {% for category in site.categories %}
+  <h3 id="{{ category | first }}">{{ category | first }}</h3>
+    <ul class="list-noStyle">
+    {% for posts in category %}
+      {% for post in posts %}
+        <li>{{ post.date | date: "%m/%-d/%Y" }}&nbsp;<a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+      {% endfor %}
+    {% endfor %}
+    </ul>
+  </li>
+{% endfor %}
+	</div> 
+</div>

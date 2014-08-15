@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Reprogram</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</description>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Recommended Readings on Software Development</title>
+        <description>&lt;p&gt;Below is my list of recommended readings on software development. These books have provided the basis of my knowledge on software design and software development practices in general. I highly recommend these books for junior developers interested in growing or possibly transitioning to software delivery.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670/ref=sr_1_1?ie=UTF8&amp;amp;qid=1406004645&amp;amp;sr=8-1&amp;amp;keywords=code+complete&quot;&gt;Code Complete: A Practical Handbook of Software Construction, Second Edition&lt;/a&gt;&lt;/strong&gt; by Steve McConnell - This book is basically a guide to software development using construction as an analogy. This book also provides a lot of data regarding the costs associated with changes and defects during the construction process.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.amazon.com/s/ref=nb_sb_ss_i_2_12?url=search-alias%3Daps&amp;amp;field-keywords=agile%20principles%20patterns%20and%20practices%20in%20c%20by%20robert%20c.%20martin&amp;amp;sprefix=agile+princi%2Caps%2C344&quot;&gt;Agile Principles, Patterns, and Practices in C#&lt;/a&gt;&lt;/strong&gt;  by Robert C. Martin and Micah Martin - This one is probably my favorite. I think of this book as a manual on software development. As the title implies, you’ll come away with fundamental knowledge of agile principles, patterns and practices. The most valuable sections for me, were around agile design, design principles and design artifacts.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.amazon.com/Microsoft%C2%AE-Application-Architecture-Patterns-Practices/dp/073562710X/ref=sr_11_1/180-2428161-0339862?ie=UTF8&amp;amp;qid=1261600635&amp;amp;sr=11-1&quot;&gt;Microsoft Application Architecture Guide&lt;/a&gt;&lt;/strong&gt;  by Microsoft Patterns &amp;amp; Practices Team - This book is great resource for technical design. There is also a helpful section on application archetypes which provides guidance on selecting an appropriate application type.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.amazon.com/Head-First-Object-Oriented-Analysis-Design/dp/0596008678&quot;&gt;Head First Object-Oriented Analysis &amp;amp; Design&lt;/a&gt;&lt;/strong&gt;  by Brett D. McLaughlin et al. - As the name implies, this book is a guide for object-oriented analysis and design using the visually rich format you’d expect from a Head-First book.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.amazon.com/Head-First-Design-Patterns-Freeman/dp/0596007124&quot;&gt;Head Design Patterns&lt;/a&gt;&lt;/strong&gt;  by Eric Freeman et al. - Another Head-First book; this one on design patterns. This book also makes a good reference to have at your desk.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.amazon.com/The-Art-Unit-Testing-examples/dp/1617290890/ref=dp_ob_title_bk&quot;&gt;The Art of Unit Testing with Examples in C#&lt;/a&gt;&lt;/strong&gt;  by Roy Osherove. - This is an awesome guide to unit testing. This book covers the basics of unit testing, all the way to integrating unit tests into the organization and the tools you will need for effective unit testing. Although there is a part of the book on Design and process, the book does not cover TDD (Test, Driven, Development). Still a great book nonetheless. It gives you everything you need to write effective unit tests and create the possibility for you to pursue TDD. &lt;/p&gt;
+</description>
+        <pubDate>Mon, 21 Jul 2014 17:16:41 -0500</pubDate>
+        <link>/2014/07/21/recommended-readings-on-software-development.html</link>
+        <guid isPermaLink="true">/2014/07/21/recommended-readings-on-software-development.html</guid>
+      </item>
+    
+      <item>
+        <title>TDD and Unit Testing Without Mocks</title>
+        <description>&lt;p&gt;About a month or so ago, on a trip to a conference, during dinner, my colleagues and I had a conversation around the use of mocks in unit testing. Not surprisingly it was a passionate conversation on the premise that mocks are bad and should be avoided because it can lead to poor testing form and ultimately sub-optimal design. The conversation was not only entertaining but very interesting, so I took some time to look into it further and form my own opinions.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;First off, why are mocks bad?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Well mocks are not necessarily bad. In fact, mocks not only help us be more agile by allowing us to program against dependencies that don’t exist, but they also help us isolate our code from their dependencies. These are good things right? Absolutely! However there are a few problems with mocks you may be unaware of.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;‘Mock’ is an overloaded term.&lt;/strong&gt;
+The term mock is confusing. Mock can have different meanings depending on what we are trying to do. For example, deciding on the approach we take for our tests (state-based vs. interaction based). Many frameworks allow you to use mocks as stubs and vice-versa. Some do make a clear distinction while others don’t. Either way, the term is confusing and can make writing unit tests more difficult.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Mocks deemphasize state-based testing.&lt;/strong&gt;
+An over reliance on mocks, especially when practicing TDD can lead toward writing more interaction based tests. The higher the number of interaction based tests the more brittle your tests are likely to be. Also, chances are the more interactions you have, the tighter the coupling between the dependency and your SUT. Which brings us to our last problem with mocks.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Mocks are a smell.&lt;/strong&gt;
+Conveniently, mocks allow us to easily traverse dependencies; however, there mere presence can be an indicator of sub-optimal design. Writing tests first certainly does help write code that is testable by reducing the number of concrete dependencies our code might have, but just because we replace a concrete dependency with an interface, does not mean our design is optimal. We are better off, but blindly implementing mocks with disregard for proper design, influences our design process in a manner that leaves us with a sub-optimal design. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;So how do we test without Mocks?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Well I’m not a proponent of completely abandoning mocks. I think this is extreme and unrealistic. After all there are some benefits; however, we should consciously reduce our dependencies on mocks (no pun intended) by defaulting to state-based tests over interaction based tests. Make state-based testing the default. In other words, focus on outcomes. It may help to keep in mind that you should be asserting your tests against outcomes. If you find yourself asserting against mocks then your unit test is probably an interaction based test. Testing interactions is better suited for integration tests; this is broad statement – it really depends on your goals, but I’m trying to drive a point that you should have few interaction based tests.&lt;/p&gt;
+
+&lt;p&gt;Below are some posts that I thought were insightful.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://openmymind.net/2011/3/23/Stop-Using-Mocks/&quot;&gt;Stop Using Mocks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://simpleprogrammer.com/2011/01/23/back-to-basics-unit-testing-without-mocks/&quot;&gt;Back to Basics. Unit Testing Without Mocks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://arlobelshee.com/the-no-mocks-book/&quot;&gt;The No Mocks Book&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://osherove.com/blog/2008/9/20/goodbye-mocks-farewell-stubs.html&quot;&gt;Goodbye Mocks. Farewell Stubs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 09 Jul 2014 12:33:05 -0500</pubDate>
+        <link>/2014/07/09/tdd-and-unit-testing-without-mocks.html</link>
+        <guid isPermaLink="true">/2014/07/09/tdd-and-unit-testing-without-mocks.html</guid>
+      </item>
+    
+      <item>
+        <title>An approach to TDD</title>
+        <description>&lt;p&gt;Over the past few months I’ve had to coach some junior developers on how to TDD. Although most of the devs I’ve been working with are knowledgeable about TDD, putting it to practice seems to be a challenge. Most of them know how to write unit tests, but are not actually practicing TDD where the development of tests drives the development of the code. Instead, they are writing the code first and then bolting tests on afterward. Although this approach works, it is not TDD; it’s unit testing. And unfortunately, misses the main benefit of TDD which is to write testable code that adheres to SOLID design principles; in particular Interface Segregation and Dependency Injection.&lt;/p&gt;
+
+&lt;p&gt;So I get that writing tests for things that you are not familiar with can be challenging. I’m definitely guilty of that! I’ll typically hack around for a little bit to explore something I’m not familiar with to try and figure out how I can test it. Ideally, this is probably where you would actually &lt;em&gt;want&lt;/em&gt; to start writing tests. I know, it’s crazy right! Anyway, this is not really the case with the devs I’ve been working with. There are a few things that seem to be a challenge:
+1. Where to start?
+2. How to organize the unit test??
+3. Use a mock, stub, both!?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;To address these challenges I unusually recommend the following approach:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Identify the system under test&lt;/strong&gt;&lt;br /&gt;
+What are we actually going to test? First off, we only test public methods or behavior that is exposed. If we are practicing proper OOP, then everything else should be hidden. If we consider the Single Responsibility principle, then we should be isolating our test to a single unit or method in the system under test.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Organize your unit test using AAA&lt;/strong&gt;&lt;br /&gt;
+Now that we’ve identified what we are going to test, we organize our unit tests into an “Arrange”, “Act”, and “Assert” sections using comments. The extra key strokes may be a pain or make you feel like a total noob, but I think the mental tickler this provides is well worth it, besides just properly organizing your unit test to more easily identify its functional components. So starting just under the “Arrange” comment, we typically start with some kind of variable representing the system under test and using productivity tools such as ReSharper or CodeRush we begin developing the unit to test.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Decide what kind of test you are going to write&lt;/strong&gt;&lt;br /&gt;
+What kind of test are we going to write? Will it be a state based test or an interactive based test? State based tests are designed to test outcomes, where as interactive based tests are design to test interactions between collaborators. If you are writing an interactive test, then you will probably be using a mock to assert some kind of behavior between the test method and an external dependency, usually the mock. If you are writing a state based test, then you will probably use a stub. Keep in mind, this is just a guideline. You might need both, depending on the complexity of your system under test. Rhino mocks actually allows you to mix and match mocks and stubs, a reason why it can be so confusing. Another way to look at it is that stubs are inputs to the system under test, where as mocks are inputs to the unit test itself. Roy Osherove wrote a short post explaining the differences between the two and when you should use them, on his blog. &lt;a href=&quot;http://osherove.com/blog/2007/9/16/mocks-and-stubs-the-difference-is-in-the-flow-of-information.html&quot;&gt;Mocks and Stubs - The difference is in the flow of information&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;c#&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// A contrived example of a simple unit test with a mock service&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;[Test]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MyMethodShouldCallDoSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; 	&lt;span class=&quot;c1&quot;&gt;// Arrange&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 	&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sut&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SystemUnderTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; 	&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MockRepository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GenerateMock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMyService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;();&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 	&lt;span class=&quot;c1&quot;&gt;// Act&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;sut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; 	&lt;span class=&quot;c1&quot;&gt;// Assert&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 	&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AssertWasCalled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DoSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Mon, 16 Jun 2014 16:21:56 -0500</pubDate>
+        <link>/2014/06/16/an-approach-to-tdd.html</link>
+        <guid isPermaLink="true">/2014/06/16/an-approach-to-tdd.html</guid>
+      </item>
+    
+      <item>
+        <title>Late night hacking</title>
+        <description>&lt;p&gt;My first post using jekyll static website template and GitHub Pages!&lt;/p&gt;
+
+&lt;p&gt;So!? What’s the big deal!? Nothing really. I started blogging a few years ago as means of capturing my thoughts and experiences getting back into software development after a 3 year hiatus. Honestly, I was so busy with work, family and improving my skills in whatever spare time I had, that I was not really active the first year. The following year I set a goal to at least write four blog posts; one per quarter. I actually exceeded my goal and wrote 6 posts. This year my goal was to write at least one post a month. I know, not very ambitious, but I’m being realistic with my commitments and obligations, so I think its a worthy goal.&lt;/p&gt;
+
+&lt;p&gt;Ok. Back to using jekyll and GitHub Pages. Why? Well my first site was with WordPress. WordPress is pretty awesome. It has a ton of features and you can get up and running very quickly; however, I was never able to find a theme I really liked and I spent way more time than I wanted to, trying to customize the themes I had. I also didn’t want to pay for hosting anymore. So I decided to cancel my hosting and started up a free blog using Blogger. Blogger has a lot of cool features too, but I didn’t like the themes that were available and really wanted to try something different. &lt;/p&gt;
+
+&lt;p&gt;I had heard about people using static website templates like jekyll and Octopress and the hacky nature of them and I was also aware that you could host a site on GitHub for free using these static website templates, so I was interested in trying it out. So here I am, writing my first post on my new blog site hosted on GitHub.&lt;/p&gt;
+
+&lt;p&gt;So far so good. I really like how I was able to quickly and easily setup the site with the look and feel I wanted. I also think its pretty awesome that I’m using html to write my posts and git to publish them. I’m a terrible speller, so spell check is something I’m seriously missing. For now, I’ll use word to write my posts and paste in. I’m not sure if there is anything I can do about that. Maybe there is a plug-in I could install on jekyll or in Sublime.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Sublime does support spell-check out of the box. On OSx it uses a standard US dictionary and is off by default. The keyboard shortcut is ‘F6’. &lt;/p&gt;
+</description>
+        <pubDate>Mon, 19 May 2014 19:25:01 -0500</pubDate>
+        <link>/2014/05/19/late-night-hacking.html</link>
+        <guid isPermaLink="true">/2014/05/19/late-night-hacking.html</guid>
+      </item>
+    
+  </channel>
+</rss>
