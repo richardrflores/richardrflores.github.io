@@ -7,14 +7,30 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Houston TechFest Talk</title>
+        <description>&lt;p&gt;Today I gave my first talk at Houston TechFest. The talk was an introduction to building web applications using ASP.NET MVC. I used a military boot camp as a metephor for developing an MVC app. It was a lot of fun! &lt;/p&gt;
+
+&lt;p&gt;Below are links to the presentation and the code for the demo. &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dl.dropboxusercontent.com/u/49013288/MVC%20Boot%20Camp.pptx&quot;&gt;MVC Boot Camp.pptx&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/richardrflores/MVCBootCamp.git&quot;&gt;MVC Boot Camp Demo&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 13 Sep 2014 11:37:25 -0500</pubDate>
+        <link>/2014/09/13/houstontechfest-talk.html</link>
+        <guid isPermaLink="true">/2014/09/13/houstontechfest-talk.html</guid>
+      </item>
+    
+      <item>
         <title>How an HTTP Request Becomes an MVC View</title>
         <description>&lt;p&gt;How does a request for a URL become HTML in an ASP.NET MVC application? This information can be easily found by doing a basic search for the ASP.NET http request cycle. This process is pretty well documented, on both &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/dd381612(v=vs.100).aspx&quot;&gt;MSDN&lt;/a&gt; and the &lt;a href=&quot;http://www.asp.net/mvc/tutorials/mvc-5/lifecycle-of-an-aspnet-mvc-5-application&quot;&gt;ASP.NET website&lt;/a&gt;, so I recommend you go there for a more detailed explanation of the process. So the purpose of this post is for me to articulate how an HTTP Request becomes an MVC View while highlighting the interesting parts.&lt;/p&gt;
 
 &lt;p&gt;When I first started programming ASP.NET applications a while back, I remember how important it was to understand the Page Life Cycle so that you could properly write code to initialize controls, control behavior and manage view-state, among other things. It described a series of stages and events in an ASP.NET application in order to convert an HTTP Request to an HTTP Response.&lt;/p&gt;
 
-&lt;p&gt;Today, ASP.NET Web Forms still uses the Page Life Cycle concept, albiet its been updated and many new features have been added along the way, such as data binding events. ASP.NET MVC has a similar concept known as the Application Execution Process where an HTTP request becomes an MVC View or an HTTP Response.&lt;/p&gt;
+&lt;p&gt;Today, ASP.NET Web Forms still uses the Page Life Cycle concept, albeit its been updated and many new features have been added along the way, such as data binding events. ASP.NET MVC has a similar concept known as the Application Execution Process where an HTTP request becomes an MVC View or an HTTP Response.&lt;/p&gt;
 
-&lt;p&gt;An HTTP Request becomes a view by going thru a series of stages and events in the ASP.NET application lifecycle.&lt;/p&gt;
+&lt;p&gt;An HTTP Request becomes a view by going thru a series of stages and events in the ASP.NET application life cycle.&lt;/p&gt;
 
 &lt;p&gt;This process includes the following stages:&lt;/p&gt;
 
