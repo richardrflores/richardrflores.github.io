@@ -11,7 +11,7 @@ Over the last month and a half, we've been working on some dense javascript code
 
 Given that you've created a new MVC web application, install RequireJS and KnockoutJS using the Package Manager Console.
 
-![Install RequireJS and KnockoutJS]({{ "/content/site/images/setupMvcRequirejs.png" | prepend: site.baseurl }} "Install RequireJS and KnockoutJS")
+![Install RequireJS and KnockoutJS]({{ "/content/site/images/setup_Mvc_Requirejs.png" | prepend: site.baseurl }} "Install RequireJS and KnockoutJS")
 
 The first thing we will do is add a script tag to the site layout file to setup a baseUrl to load our scripts. There are a couple of ways you can do [this](http://requirejs.org/docs/api.html#jsfiles). For this example we'll create a reference to require.js using the src attribute of the script tag.
 
@@ -57,7 +57,7 @@ Something worth mentioning is the arrangement of your script files. The Require 
 
 The API docs provide a sample directory layout. Below is the one used for this sample based on the API docs. Note the presence of the app directory which resembles the directory structure of the MVC Controllers folder. More about that later.
 
-![Scripts directory layout]({{ "/content/site/images/scriptsLayout.png" | prepend: site.baseurl }} "Scripts directory layout")
+![Scripts directory layout]({{ "/content/site/images/scripts_Layout.png" | prepend: site.baseurl }} "Scripts directory layout")
 
 Great! We've got a reference to RequireJS and we've configured it. Now what? Well we need to define a web module. More specifically, we want a an asynchronous module definition ([AMD](http://requirejs.org/docs/whyamd.html)) which is a specialized function wrapped format that require provides. 
 

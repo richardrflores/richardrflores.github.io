@@ -14,7 +14,7 @@
 
 &lt;p&gt;Given that you’ve created a new MVC web application, install RequireJS and KnockoutJS using the Package Manager Console.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/content/site/images/setupMvcRequirejs.png&quot; alt=&quot;Install RequireJS and KnockoutJS&quot; title=&quot;Install RequireJS and KnockoutJS&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/site/images/setup_Mvc_Requirejs.png&quot; alt=&quot;Install RequireJS and KnockoutJS&quot; title=&quot;Install RequireJS and KnockoutJS&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The first thing we will do is add a script tag to the site layout file to setup a baseUrl to load our scripts. There are a couple of ways you can do &lt;a href=&quot;http://requirejs.org/docs/api.html#jsfiles&quot;&gt;this&lt;/a&gt;. For this example we’ll create a reference to require.js using the src attribute of the script tag.&lt;/p&gt;
 
@@ -58,7 +58,7 @@
 
 &lt;p&gt;The API docs provide a sample directory layout. Below is the one used for this sample based on the API docs. Note the presence of the app directory which resembles the directory structure of the MVC Controllers folder. More about that later.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/content/site/images/scriptsLayout.png&quot; alt=&quot;Scripts directory layout&quot; title=&quot;Scripts directory layout&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/site/images/scripts_Layout.png&quot; alt=&quot;Scripts directory layout&quot; title=&quot;Scripts directory layout&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Great! We’ve got a reference to RequireJS and we’ve configured it. Now what? Well we need to define a web module. More specifically, we want a an asynchronous module definition (&lt;a href=&quot;http://requirejs.org/docs/whyamd.html&quot;&gt;AMD&lt;/a&gt;) which is a specialized function wrapped format that require provides. &lt;/p&gt;
 
