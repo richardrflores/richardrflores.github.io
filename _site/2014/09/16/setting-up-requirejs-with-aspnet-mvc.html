@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting up an ASP.NET MVC application with RequireJS and KnockoutJS</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300,700,|Oswald:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/normalize.css">
+  	<link rel="stylesheet" href="/css/foundation.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/scripts/vendor/modernizr.js"></script>
+</head>
+
+    <body>
+
+    <!-- Nav Bar -->
+ <div class="site-header">
+  <div class="row">
+    <div class="large-12 columns">
+      <!-- <div class="nav-bar right">
+       <ul class="button-group">
+         <li><a href="#" class="button">Link 1</a></li>
+         <li><a href="#" class="button">Link 2</a></li>
+         <li><a href="#" class="button">Link 3</a></li>
+         <li><a href="#" class="button">Link 4</a></li>
+        </ul>
+      </div> -->
+      <h1><a href="/">The Reprogram </a><small>My blog about programming and software development.</small></h1>
+    </div>
+  </div>
+ </div>
+  <!-- End Nav -->
+
+ 
+  <!-- Main Page Content and Sidebar -->
+ 
+  <div class="row">
+ 
+    <!-- Main Blog Content -->
+
+    <div class="large-9 columns" role="content">
+      <h3><a href="#">Setting up an ASP.NET MVC application with RequireJS and KnockoutJS</a></h3>
+<h6>Sep 16, 2014 &nbsp; posted in  <a href="/categories">mvc</a>  <a href="/categories">requirejs</a>  <a href="/categories">knockoutjs</a> </h6>
+
+<p></p> 
+<div class="row">
+	<div class="large-12 columns">
+    	<p>I’m currently working on an ASP.NET MVC project that uses RequireJS and KnockoutJS. If you don’t know, RequireJS is an open source javascript library for loading javascript files and modules. RequireJS allows us to encapsulate code into a useful units (modules) and manage the dependencies to other units of javascript code. KnockoutJS is an open source javascript library for creating dynamic UIs. KnockoutJS uses the Model-View-View Model (MVVM) pattern to provide binding and dependency tracking between client side data models and the UI. </p>
+
+<p>Over the last month and a half, we’ve been working on some dense javascript code that makes extensive use of RequireJS to manage dependencies. The team that initally implemented the code leveraged some design patterns we are used to seeing on the server, such as abstracting common behavior to a base class (a base view model), using the template-method pattern for preparing data and making Api calls and encapsulating common UI components such as ‘Save’ and ‘Cancel’ for reuse. In a large enterprise application, you can imagine how seemingly complicated this code can get and more often than not, we would often run into trouble with data or some dependency not being available. Admittedly, when I was introduced to RequireJS, it was like, “Here’s how define a module, reference dependencies, now GO!”. I hit the ground running and never really understood how it was setup in the project. So to get a better understanding of what is going and how RequireJS and KnockoutJS are wired up with MVC I created a naive example. </p>
+
+<p>Given that you’ve created a new MVC web application, install RequireJS and KnockoutJS using the Package Manager Console.</p>
+
+<p><img src="/content/site/images/setupMvcRequirejs.png" alt="Install RequireJS and KnockoutJS" title="Install RequireJS and KnockoutJS" /></p>
+
+<p>The first thing we will do is add a script tag to the site layout file to setup a baseUrl to load our scripts. There are a couple of ways you can do <a href="http://requirejs.org/docs/api.html#jsfiles">this</a>. For this example we’ll create a reference to require.js using the src attribute of the script tag.</p>
+
+<div class="highlight"><pre><code class="html"><span class="lineno"> 1</span> <span class="nt">&lt;html&gt;</span>
+<span class="lineno"> 2</span>     <span class="nt">&lt;head&gt;</span>
+<span class="lineno"> 3</span>         <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">/&gt;</span>
+<span class="lineno"> 4</span>         <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="nt">&gt;</span>
+<span class="lineno"> 5</span>         <span class="nt">&lt;title&gt;</span>Require KO Playground<span class="nt">&lt;/title&gt;</span>
+<span class="lineno"> 6</span>     <span class="nt">&lt;/head&gt;</span>
+<span class="lineno"> 7</span>     <span class="nt">&lt;body&gt;</span>
+<span class="lineno"> 8</span>         <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+<span class="lineno"> 9</span>             @RenderBody()
+<span class="lineno">10</span>         <span class="nt">&lt;/section&gt;</span>
+<span class="lineno">11</span>         <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;~/Scripts/lib/require.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="lineno">12</span>         @RenderSection(&quot;scripts&quot;, required: false)
+<span class="lineno">13</span>     <span class="nt">&lt;/body&gt;</span>
+<span class="lineno">14</span> <span class="nt">&lt;/html&gt;</span></code></pre></div>
+
+<p>Next we’ll set the baseUrl manually using a <a href="http://requirejs.org/docs/api.html#config">RequireJS config</a>. The file should be created in the root directory of your scripts folder. You can name the file whatever you want. For this example I named it ‘main.js’.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="lineno"> 1</span> <span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+<span class="lineno"> 2</span>     <span class="nx">baseUrl</span><span class="o">:</span> <span class="s1">&#39;/Scripts/app&#39;</span><span class="p">,</span>
+<span class="lineno"> 3</span>     <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 4</span>         <span class="c1">// the left side is the module ID,</span>
+<span class="lineno"> 5</span>         <span class="c1">// the right side is the path to</span>
+<span class="lineno"> 6</span>         <span class="c1">// the file, relative to baseUrl.</span>
+<span class="lineno"> 7</span>         <span class="c1">// Also, the path should NOT include</span>
+<span class="lineno"> 8</span>         <span class="c1">// the &#39;.js&#39; file extension. </span>
+<span class="lineno"> 9</span>         <span class="nx">jquery</span><span class="o">:</span> <span class="s1">&#39;../lib/jquery-2.1.1&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>         <span class="nx">knockout</span><span class="o">:</span> <span class="s1">&#39;../lib/knockout-3.2.0&#39;</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span> <span class="p">});</span></code></pre></div>
+
+<p>For this example the baseUrl points to the app folder in the scripts directory. I’ve moved the files we installed int the first step into a folder called lib.</p>
+
+<p>Something worth mentioning is the arrangement of your script files. The Require API documentation says:</p>
+
+<blockquote>
+  <p>Avoid deep folder hierarchies for scripts, and instead either keep all the scripts in baseUrl, or if you want, separate your interlibrary-supplied code from your app code  </p>
+</blockquote>
+
+<p>The API docs provide a sample directory layout. Below is the one used for this sample based on the API docs. Note the presence of the app directory which resembles the directory structure of the MVC Controllers folder. More about that later.</p>
+
+<p><img src="/content/site/images/scriptsLayout.png" alt="Scripts directory layout" title="Scripts directory layout" /></p>
+
+<p>Great! We’ve got a reference to RequireJS and we’ve configured it. Now what? Well we need to define a web module. More specifically, we want a an asynchronous module definition (<a href="http://requirejs.org/docs/whyamd.html">AMD</a>) which is a specialized function wrapped format that require provides. </p>
+
+<p>For our example we’ll add a Default controller and a corresponding view.</p>
+
+<div class="highlight"><pre><code class="c#"><span class="k">using</span> <span class="nn">System.Web.Mvc</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">RequireKoPlayground.Controllers</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">DefaultController</span> <span class="p">:</span> <span class="n">Controller</span>
+    <span class="p">{</span>
+        <span class="c1">// GET: Default</span>
+        <span class="k">public</span> <span class="n">ActionResult</span> <span class="nf">Index</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">ViewBag</span><span class="p">.</span><span class="n">Greeting</span> <span class="p">=</span> <span class="s">&quot;Welcome to my Require KO Playground!&quot;</span><span class="p">;</span>
+
+            <span class="k">return</span> <span class="nf">View</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="html">@using RequireKoPlayground.Extensions
+@{
+    ViewBag.Title = &quot;Index&quot;;
+}
+
+<span class="nt">&lt;h2&gt;</span>@ViewBag.Greeting<span class="nt">&lt;/h2&gt;</span></code></pre></div>
+
+<p>Now we want to do something interesting. For our example we want to create a very basic view that binds some client-side data from a view model using <a href="http://knockoutjs.com/">KnockoutJS</a> (a dependency we need to load - this is the problem that require solves for us). So in the Scripts/app/Controllers/Default/ViewModels directory we’ll define a module that represents our viewModel. This viewModel will provide data for our view and encapsulate data related behavior of our view. The viewModel itself is defined as an unnamed module using RequireJS conventions. </p>
+
+<p>Some thoughts on AMDs: People often think of AMDs as a way of injecting dependencies into our views and viewModels, which sometimes leads to the thought that this is a way of doing dependency injection on the client. NO! Definately not that! I like to think of the AMDs as a way of defining classes in javascript. The input parameters to the define function can then be thought of as using directive in C#, allowing the use of the delclared dependencies.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">define</span><span class="p">([</span><span class="s1">&#39;knockout&#39;</span><span class="p">],</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ko</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">viewModel</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">ko</span><span class="p">.</span><span class="nx">observable</span><span class="p">();</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="nx">viewModel</span><span class="p">;</span>
+<span class="p">});</span></code></pre></div>
+
+<p>We also need to define a module that represents our view. This module will allow us to seperate our UI code, specifically code we would use to manipulate the DOM. This is also where will bind our viewModel to our view using the ko.applyBindings method.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">define</span><span class="p">([</span><span class="s1">&#39;jquery&#39;</span><span class="p">,</span> <span class="s1">&#39;knockout&#39;</span><span class="p">,</span> <span class="s1">&#39;./ViewModels/defaultViewModel&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">ko</span><span class="p">,</span> <span class="nx">defaultViewModel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">viewModel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">defaultViewModel</span><span class="p">();</span>
+
+    <span class="nx">ko</span><span class="p">.</span><span class="nx">applyBindings</span><span class="p">(</span><span class="nx">viewModel</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<p>So we’ve defined some modules that will bind data to our MVC view using KnockoutJS. Now we need to add some elements to our cshtml file to bind to. We also need to make a call to require to load the configuration we created earlier and execute our modules. We’ll do this using an Html helper.</p>
+
+<div class="highlight"><pre><code class="html">@using RequireKoPlayground.Extensions
+@{
+    ViewBag.Title = &quot;Index&quot;;
+}
+
+<span class="nt">&lt;h2&gt;</span>@ViewBag.Greeting<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+    Enter your name? <span class="nt">&lt;input</span> <span class="na">data-bind=</span><span class="s">&quot;textInput: name&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+    Your name is:
+    <span class="nt">&lt;span</span> <span class="na">data-bind=</span><span class="s">&quot;text: name&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+
+@section scripts
+{
+    @Html.InitPageMainModule(&quot;index&quot;)
+}</code></pre></div>
+
+<p>Why do we need an Html helper? Honestly, we really don’t need it. We could just add the necessary require statement to the chtml file directly using a script tag, but as you can imagine, this will eventually lead to code duplication. Using a helper we can reduce the amount of code necessary to load our configuration and execute our modules. We also don’t have to worry about relative paths. </p>
+
+<p>The helper below is loosely based off an example by Joe Wilson, from <a href="http://volaresystems.com/blog/post/2014/05/27/Adding-RequireJS-to-an-ASPNET-MVC-project">Volare Systems</a></p>
+
+<div class="highlight"><pre><code class="c#"><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Web</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Web.Mvc</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">RequireKoPlayground.Extensions</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">RequireJsHelpers</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="n">MvcHtmlString</span> <span class="nf">InitPageMainModule</span><span class="p">(</span><span class="k">this</span> <span class="n">HtmlHelper</span> <span class="n">helper</span><span class="p">,</span> <span class="kt">string</span> <span class="n">pageModule</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">require</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
+            <span class="kt">var</span> <span class="n">scriptsPath</span> <span class="p">=</span> <span class="s">&quot;~/Scripts/&quot;</span><span class="p">;</span>
+            <span class="kt">var</span> <span class="n">absolutePath</span> <span class="p">=</span> <span class="n">VirtualPathUtility</span><span class="p">.</span><span class="n">ToAbsolute</span><span class="p">(</span><span class="n">scriptsPath</span><span class="p">);</span>
+            <span class="kt">var</span> <span class="n">modulePath</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;Controllers/{0}&quot;</span><span class="p">,</span> <span class="n">helper</span><span class="p">.</span><span class="n">ViewContext</span><span class="p">.</span><span class="n">RouteData</span><span class="p">.</span><span class="n">Values</span><span class="p">[</span><span class="s">&quot;controller&quot;</span><span class="p">]);</span>
+
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">&quot;&lt;script&gt;&quot;</span><span class="p">);</span>
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendFormat</span><span class="p">(</span><span class="s">&quot;require([&#39;{0}main.js&#39;], &quot;</span><span class="p">,</span> <span class="n">absolutePath</span><span class="p">);</span>
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendFormat</span><span class="p">(</span><span class="s">&quot;function() { require([&#39;{0}/{1}&#39;, &#39;domReady&#39;]); }&quot;</span><span class="p">,</span> <span class="n">modulePath</span><span class="p">,</span> <span class="n">pageModule</span><span class="p">);</span>
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">&quot;);&quot;</span><span class="p">);</span>
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">&quot;&lt;/script&gt;&quot;</span><span class="p">);</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">MvcHtmlString</span><span class="p">(</span><span class="n">require</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>That’s it. We should be able to run our application and enter a name and watch that name get generated on the screen dynamically. There is one thing though. I don’t really like that we have to use this helper on every MVC view. I think there is a way we can improve upon this in my next post.</p>
+
+    </div>
+</div>
+<div class="row">
+	<div class="large-12 columns">
+    	
+    		    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'thereprogram'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    	
+    </div>
+</div>
+    </div>
+ 
+    <!-- End Main Content -->
+ 
+    <!-- Sidebar -->
+ 
+    <aside class="large-3 columns">
+      <h5>About me</h5>
+      <img  alt="Profile pic" class="vert-space-below" src="/content/site/profile.jpg"></img>
+      <p>
+        Hi! I'm Richard Flores and I'm a software developer in Houston. <br>This is where I blog about my observations, experiences and opinions on programming and software development.
+      </p>
+      <h5><a href="/categories">categories</a></h5>
+      <h5><a href="/archives">archives</a></h5>
+    </aside> 
+    <!-- End Sidebar -->
+  </div>
+ 
+  <!-- End Main Content and Sidebar -->
+
+  <!-- Footer -->
+ 
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>© Copyright 2014 Richard Flores. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="/scripts/vendor/jquery.js"></script>
+    <script src="/scripts/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+     <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'thereprogram'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+    </body>
+</html>

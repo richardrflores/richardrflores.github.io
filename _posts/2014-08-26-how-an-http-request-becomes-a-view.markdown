@@ -106,7 +106,7 @@ protected override void ExecuteCore()
         PossiblySaveTempData();
     }
 }
-{% endhighlight %} %} 
+{% endhighlight %}
 
 Result Execution. The action method receives user input, prepares the appropriate response data, and then executes the result by returning a result type such as ViewResult, which renders a view and is the most-often used result type. A view contains the HTML markup and content that is sent to the browser. 
 

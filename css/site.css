@@ -72,6 +72,11 @@ p {
 /* Syntax highlighting styles */
 /* ----------------------------------------------------------*/
 
+code {
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-weight: bold;
+  color: #d0d0d0; }
+
 .lineno { color: #999999; }
 .highlight { background-color: #404040; padding: 8px; margin-bottom: 16px; }
 .highlight .c { color: #999999; font-style: italic } /* Comment */
@@ -105,17 +110,17 @@ p {
 .highlight .kt { color: #6ab825; font-weight: bold } /* Keyword.Type */
 .highlight .ld { color: #d0d0d0 } /* Literal.Date */
 .highlight .m { color: #3677a9 } /* Literal.Number */
-.highlight .s { color: #ed9d13 } /* Literal.String */
+.highlight .s { color: #ff9000 } /* Literal.String */
 .highlight .na { color: #bbbbbb } /* Name.Attribute */
 .highlight .nb { color: #24909d } /* Name.Builtin */
-.highlight .nc { color: #447fcf; text-decoration: underline } /* Name.Class */
+.highlight .nc { color: #447fcf } /* Name.Class */
 .highlight .no { color: #40ffff } /* Name.Constant */
 .highlight .nd { color: #ffa500 } /* Name.Decorator */
 .highlight .ni { color: #d0d0d0 } /* Name.Entity */
 .highlight .ne { color: #bbbbbb } /* Name.Exception */
 .highlight .nf { color: #447fcf } /* Name.Function */
 .highlight .nl { color: #d0d0d0 } /* Name.Label */
-.highlight .nn { color: #447fcf; text-decoration: underline } /* Name.Namespace */
+.highlight .nn { color: #447fcf } /* Name.Namespace */
 .highlight .nx { color: #d0d0d0 } /* Name.Other */
 .highlight .py { color: #d0d0d0 } /* Name.Property */
 .highlight .nt { color: #6ab825; font-weight: bold } /* Name.Tag */
