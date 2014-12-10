@@ -7,7 +7,7 @@ tags: 	[]
 ---
 I'm currently working on an ASP.NET MVC project that uses RequireJS and KnockoutJS. If you don't know, RequireJS is an open source javascript library for loading javascript files and modules. RequireJS allows us to encapsulate code into a useful units (modules) and manage the dependencies to other units of javascript code. KnockoutJS is an open source javascript library for creating dynamic UIs. KnockoutJS uses the Model-View-View Model (MVVM) pattern to provide binding and dependency tracking between client side data models and the UI. 
 
-Over the last month and a half, we've been working on some dense javascript code that makes extensive use of RequireJS to manage dependencies. The team that initally implemented the code leveraged some design patterns we are used to seeing on the server, such as abstracting common behavior to a base class (a base view model), using the template-method pattern for preparing data and making Api calls and encapsulating common UI components such as 'Save' and 'Cancel' for reuse. In a large enterprise application, you can imagine how seemingly complicated this code can get and more often than not, we would often run into trouble with data or some dependency not being available. Admittedly, when I was introduced to RequireJS, it was like, "Here's how define a module, reference dependencies, now GO!". I hit the ground running and never really understood how it was setup in the project. So to get a better understanding of what is going and how RequireJS and KnockoutJS are wired up with MVC I created a naive example. You can find the example project on github at [richardrflores/RequireKoPlayground](https://github.com/richardrflores/RequireKoPlayground).
+Over the last month and a half, we've been working on some dense javascript code that makes extensive use of RequireJS to manage dependencies. The team that initially implemented the code leveraged some design patterns we are used to seeing on the server, such as abstracting common behavior to a base class (a base view model), using the template-method pattern for preparing data and making Api calls and encapsulating common UI components such as 'Save' and 'Cancel' for reuse. In a large enterprise application, you can imagine how seemingly complicated this code can get and more often than not, we would often run into trouble with data or some dependency not being available. Admittedly, when I was introduced to RequireJS, it was like, "Here's how define a module, reference dependencies, now GO!". I hit the ground running and never really understood how it was setup in the project. So to get a better understanding of what is going and how RequireJS and KnockoutJS are wired up with MVC I created a naive example. You can find the example project on github at [richardrflores/RequireKoPlayground](https://github.com/richardrflores/RequireKoPlayground).
 
 Given that you've created a new MVC web application, install RequireJS and KnockoutJS using the Package Manager Console.
 
@@ -92,7 +92,7 @@ namespace RequireKoPlayground.Controllers
 
 Now we want to do something interesting. For our example we want to create a very basic view that binds some client-side data from a view model using [KnockoutJS](http://knockoutjs.com/) (a dependency we need to load - this is the problem that require solves for us). So in the Scripts/app/Controllers/Default/ViewModels directory we'll define a module that represents our viewModel. This viewModel will provide data for our view and encapsulate data related behavior of our view. The viewModel itself is defined as an unnamed module using RequireJS conventions. 
 
-Some thoughts on AMDs: People often think of AMDs as a way of injecting dependencies into our views and viewModels, which sometimes leads to the thought that this is a way of doing dependency injection on the client. NO! Definately not that! I like to think of the AMDs as a way of defining classes in javascript. The input parameters to the define function can then be thought of as using directive in C#, allowing the use of the delclared dependencies.
+Some thoughts on AMDs: People often think of AMDs as a way of injecting dependencies into our views and viewModels, which sometimes leads to the thought that this is a way of doing dependency injection on the client. NO! Definitely not that! I like to think of the AMDs as a way of defining classes in javascript. The input parameters to the define function can then be thought of as using directive in C#, allowing the use of the declared dependencies.
 
 {% highlight javascript lineos %}
 define(['knockout'], function (ko) {
@@ -107,7 +107,7 @@ define(['knockout'], function (ko) {
 });
 {% endhighlight %}
 
-We also need to define a module that represents our view. This module will allow us to seperate our UI code, specifically code we would use to manipulate the DOM. This is also where will bind our viewModel to our view using the ko.applyBindings method.
+We also need to define a module that represents our view. This module will allow us to separate our UI code, specifically code we would use to manipulate the DOM. This is also where will bind our viewModel to our view using the ko.applyBindings method.
 
 {% highlight javascript lineos %}
 define(['jquery', 'knockout', './ViewModels/defaultViewModel'], function($, ko, defaultViewModel) {

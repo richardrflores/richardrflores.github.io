@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improving setup of ASP.NET MVC application with RequireJS and KnockoutJS</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300,700,|Oswald:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/normalize.css">
+  	<link rel="stylesheet" href="/css/foundation.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/scripts/vendor/modernizr.js"></script>
+</head>
+
+    <body>
+
+    <!-- Nav Bar -->
+ <div class="site-header">
+  <div class="row">
+    <div class="large-12 columns">
+      <!-- <div class="nav-bar right">
+       <ul class="button-group">
+         <li><a href="#" class="button">Link 1</a></li>
+         <li><a href="#" class="button">Link 2</a></li>
+         <li><a href="#" class="button">Link 3</a></li>
+         <li><a href="#" class="button">Link 4</a></li>
+        </ul>
+      </div> -->
+      <h1><a href="/">The Reprogram </a><small>My blog about programming and software development.</small></h1>
+    </div>
+  </div>
+ </div>
+  <!-- End Nav -->
+
+ 
+  <!-- Main Page Content and Sidebar -->
+ 
+  <div class="row">
+ 
+    <!-- Main Blog Content -->
+
+    <div class="large-9 columns" role="content">
+      <h3><a href="#">Improving setup of ASP.NET MVC application with RequireJS and KnockoutJS</a></h3>
+<h6>Dec 9, 2014 &nbsp; posted in  <a href="/categories">mvc</a>  <a href="/categories">requirejs</a>  <a href="/categories">knockoutjs</a> </h6>
+
+<p></p> 
+<div class="row">
+	<div class="large-12 columns">
+    	<p>In this post I want to improve upon the setup I covered in the previous post <a href="/2014/09/16/setting-up-requirejs-with-aspnet-mvc.html">Setting up an ASP.NET MVC application with RequireJS and KnockoutJS</a></p>
+
+<p>I wasn’t crazy about having to implement the ‘@Html.InitPageMainModule()’ helper in every view to setup the page module. I do like that it’s declarative, but ultimately it’s unnecessary.</p>
+
+<div class="highlight"><pre><code class="html">@using RequireKoPlayground.Extensions
+@{
+    ViewBag.Title = &quot;Index&quot;;
+}
+
+<span class="nt">&lt;h2&gt;</span>@ViewBag.Greeting<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+    Enter your name? <span class="nt">&lt;input</span> <span class="na">data-bind=</span><span class="s">&quot;textInput: name&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+    Your name is:
+    <span class="nt">&lt;span</span> <span class="na">data-bind=</span><span class="s">&quot;text: name&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+
+@section scripts
+{
+    @Html.InitPageMainModule(&quot;index&quot;)
+}</code></pre></div>
+
+<p>To improve upon this we can take advantage of the HttpContext.Current.Request and VirtualPathUtility to get the path and file name of the view we want to define a module for.</p>
+
+<div class="highlight"><pre><code class="c#"><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Web</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Web.Mvc</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">RequireKoPlayground.Extensions</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">RequireJsHelpers</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="n">MvcHtmlString</span> <span class="nf">InitPageMainModule</span><span class="p">(</span><span class="k">this</span> <span class="n">HtmlHelper</span> <span class="n">helper</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">require</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
+            <span class="kt">var</span> <span class="n">scriptsPath</span> <span class="p">=</span> <span class="s">&quot;~/Scripts/&quot;</span><span class="p">;</span>
+            <span class="kt">var</span> <span class="n">absolutePath</span> <span class="p">=</span> <span class="n">VirtualPathUtility</span><span class="p">.</span><span class="n">ToAbsolute</span><span class="p">(</span><span class="n">scriptsPath</span><span class="p">);</span>
+            <span class="kt">var</span> <span class="n">modulePath</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;Controllers/{0}&quot;</span><span class="p">,</span> <span class="n">helper</span><span class="p">.</span><span class="n">ViewContext</span><span class="p">.</span><span class="n">RouteData</span><span class="p">.</span><span class="n">Values</span><span class="p">[</span><span class="s">&quot;controller&quot;</span><span class="p">]);</span>
+            <span class="kt">var</span> <span class="n">pathstring</span> <span class="p">=</span> <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">Request</span><span class="p">.</span><span class="n">FilePath</span><span class="p">;</span>
+            <span class="kt">var</span> <span class="n">pageModule</span> <span class="p">=</span> <span class="n">VirtualPathUtility</span><span class="p">.</span><span class="n">GetFileName</span><span class="p">(</span><span class="n">pathstring</span><span class="p">);</span>
+
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">&quot;&lt;script&gt;&quot;</span><span class="p">);</span>
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendFormat</span><span class="p">(</span><span class="s">&quot;require([&#39;{0}main.js&#39;], &quot;</span><span class="p">,</span> <span class="n">absolutePath</span><span class="p">);</span>
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendFormat</span><span class="p">(</span><span class="s">&quot;function() { require([&#39;{0}/{1}&#39;, &#39;domReady&#39;]); }&quot;</span><span class="p">,</span> <span class="n">modulePath</span><span class="p">,</span> <span class="n">pageModule</span><span class="p">);</span>
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">&quot;);&quot;</span><span class="p">);</span>
+            <span class="n">require</span><span class="p">.</span><span class="n">AppendLine</span><span class="p">(</span><span class="s">&quot;&lt;/script&gt;&quot;</span><span class="p">);</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">MvcHtmlString</span><span class="p">(</span><span class="n">require</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>We no longer have to pass in the name of the view as we were doing previously and can remove the call to the RequireJsHelper in our view and place it in the layout of the web application.</p>
+
+<div class="highlight"><pre><code class="html">@using RequireKoPlayground.Extensions
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Require KO Playground<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            @RenderBody()
+        <span class="nt">&lt;/section&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;~/Scripts/lib/require.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+        @Html.InitPageMainModule()
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></div>
+
+<p>So long as you stick to the controller convention for your modules described in the first post, this should just work.</p>
+
+
+    </div>
+</div>
+<div class="row">
+	<div class="large-12 columns">
+    	
+    		    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'thereprogram'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    	
+    </div>
+</div>
+    </div>
+ 
+    <!-- End Main Content -->
+ 
+    <!-- Sidebar -->
+ 
+    <aside class="large-3 columns">
+      <h5>About me</h5>
+      <img  alt="Profile pic" class="vert-space-below" src="/content/site/profile.jpg"></img>
+      <p>
+        Hi! I'm Richard Flores and I'm a software developer in Houston. <br>This is where I blog about my observations, experiences and opinions on programming and software development.
+      </p>
+      <h5><a href="/categories">categories</a></h5>
+      <h5><a href="/archives">archives</a></h5>
+    </aside> 
+    <!-- End Sidebar -->
+  </div>
+ 
+  <!-- End Main Content and Sidebar -->
+
+  <!-- Footer -->
+ 
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>© Copyright 2014 Richard Flores. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="/scripts/vendor/jquery.js"></script>
+    <script src="/scripts/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+     <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'thereprogram'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+    </body>
+</html>
