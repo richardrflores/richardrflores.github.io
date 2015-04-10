@@ -1,4 +1,4 @@
-	---
+---
 layout: post
 title:  "Coercion of types (soft casting)"
 date:   2015-03-18 14:30:00
