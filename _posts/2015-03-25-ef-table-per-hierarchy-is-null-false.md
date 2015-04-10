@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "EF Table Per Hierarchy (TPH) IsNull = False Error"
-date:   2014-03-25 20:00:00
+date:   2015-03-25 20:00:00
 categories: ["Entity Framework, EF"]
 tags: 	["Entity Framework, EF"]
 ---
