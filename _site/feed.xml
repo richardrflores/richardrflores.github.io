@@ -7,6 +7,69 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>SignalR Fundamentals Talk</title>
+        <description>&lt;p&gt;I had the pleasure of a giving a talk to the Houston Dot Net User Group yesterday evening about fundamental concepts related to SignalR. I had a really good time, thanks to all in attendance!&lt;/p&gt;
+
+&lt;p&gt;Below are the links to the code and the slides.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/richardrflores/SignalRChat&quot;&gt;Demos&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://dl.dropboxusercontent.com/u/49013288/SignalR%20Talk&quot;&gt;Presenation&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 12 Jun 2015 03:00:00 -0500</pubDate>
+        <link>/2015/06/12/signalr-fundamentals-talk-hdnug.html</link>
+        <guid isPermaLink="true">/2015/06/12/signalr-fundamentals-talk-hdnug.html</guid>
+      </item>
+    
+      <item>
+        <title>EF Table Per Hierarchy (TPH) IsNull = False Error</title>
+        <description>&lt;p&gt;Today I had to refactor some domain models to a generalized hierarchy with EF. I used the TPH pattern defined by the EF team to split a JournalEntryHeader into a BillingRecordJournalEntryHeader and an InvoiceJournalEntryHeader in order to secure the domain models using the projects data entitlements paradigm.&lt;/p&gt;
+
+&lt;p&gt;Not so fast!&lt;/p&gt;
+
+&lt;p&gt;I hit a couple of blocks. The main reason is that we were trying to use two different discriminator columns. I kept getting a “IsNull=False” error. Although syntactically it was implemented correctly, it did not work. I then tried to use a type property that we have that actually would have worked better, but I ran into the same problem. This was troubling because we have this working somewhere else in the solution…More on that later.&lt;/p&gt;
+
+&lt;p&gt;A few things I discovered:
+1. The EF mapping configuration Map method takes either a string to map the property or a lambda. 
+2. If using the string, then the HasValue method must specify a value to use as a discriminator. If using the lambda, then you must use the HasValue method; in this case the HasValue does not require you to specify a discriminator value; I assume you could use a predicate to check against in the lambda.
+3. Using the lambda syntax, you cannot use an enum as the property to discriminate because EF will try to convert the value to primitive type, which throws an exception. If your discriminator is an enum then use the string syntax.&lt;/p&gt;
+
+&lt;p&gt;After several iterations and several searches, I realized that the error was the result of using a mapped property as a discriminator. This seemed to be the most common issue others experienced; this usage does not appear to be supported. As I mentioned earlier, we have this working somewhere else. After reviewing that implementation, I noticed that the property being used as a discriminator is not  defined on the super class of the implementing class; instead, it’s defined one more level up. Since it’s not acting as a property and discriminator on the super class, then EF does not seem to care.&lt;/p&gt;
+
+&lt;p&gt;Ultimately, I added another property to use only as a discriminator. &lt;/p&gt;
+</description>
+        <pubDate>Wed, 25 Mar 2015 15:00:00 -0500</pubDate>
+        <link>/2015/03/25/ef-table-per-hierarchy-is-null-false.html</link>
+        <guid isPermaLink="true">/2015/03/25/ef-table-per-hierarchy-is-null-false.html</guid>
+      </item>
+    
+      <item>
+        <title>Coercion of types (soft casting)</title>
+        <description>&lt;p&gt;Today a colleague of mine used the word “coercion” when referring to a soft cast in code. Some thoughts I captured about this.&lt;/p&gt;
+
+&lt;p&gt;Hard cast vs soft cast or coercion vs. explicit casting. In C# this is the difference between using:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;c#&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Hard cast    &lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;casted&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SomeType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;castMe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Soft cast&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;softCast&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;castMe&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SomeType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Wed, 18 Mar 2015 09:30:00 -0500</pubDate>
+        <link>/2015/03/18/coercion-of-types-soft-casting.html</link>
+        <guid isPermaLink="true">/2015/03/18/coercion-of-types-soft-casting.html</guid>
+      </item>
+    
+      <item>
+        <title>Demon hunter level 12</title>
+        <description>&lt;p&gt;Warnings in code. Use warnings in code when a challenging section of code has been implemented. Should be in a comment banner and say something like…”If you are not do not have these skills (Demon hunter level 12) then you should probably not be modifying this code!”&lt;/p&gt;
+</description>
+        <pubDate>Wed, 18 Mar 2015 09:14:00 -0500</pubDate>
+        <link>/2015/03/18/demon-hunter-level-12.html</link>
+        <guid isPermaLink="true">/2015/03/18/demon-hunter-level-12.html</guid>
+      </item>
+    
+      <item>
         <title>Improving setup of ASP.NET MVC application with RequireJS and KnockoutJS</title>
         <description>&lt;p&gt;In this post I want to improve upon the setup I covered in the previous post &lt;a href=&quot;/2014/09/16/setting-up-requirejs-with-aspnet-mvc.html&quot;&gt;Setting up an ASP.NET MVC application with RequireJS and KnockoutJS&lt;/a&gt;&lt;/p&gt;
 
@@ -445,69 +508,6 @@ Conveniently, mocks allow us to easily traverse dependencies; however, there mer
         <pubDate>Wed, 09 Jul 2014 12:33:05 -0500</pubDate>
         <link>/2014/07/09/tdd-and-unit-testing-without-mocks.html</link>
         <guid isPermaLink="true">/2014/07/09/tdd-and-unit-testing-without-mocks.html</guid>
-      </item>
-    
-      <item>
-        <title>An approach to TDD</title>
-        <description>&lt;p&gt;Over the past few months I’ve had to coach some junior developers on how to TDD. Although most of the devs I’ve been working with are knowledgeable about TDD, putting it to practice seems to be a challenge. Most of them know how to write unit tests, but are not actually practicing TDD where the development of tests drives the development of the code. Instead, they are writing the code first and then bolting tests on afterward. Although this approach works, it is not TDD; it’s unit testing. And unfortunately, misses the main benefit of TDD which is to write testable code that adheres to SOLID design principles; in particular Interface Segregation and Dependency Injection.&lt;/p&gt;
-
-&lt;p&gt;So I get that writing tests for things that you are not familiar with can be challenging. I’m definitely guilty of that! I’ll typically hack around for a little bit to explore something I’m not familiar with to try and figure out how I can test it. Ideally, this is probably where you would actually &lt;em&gt;want&lt;/em&gt; to start writing tests. I know, it’s crazy right! Anyway, this is not really the case with the devs I’ve been working with. There are a few things that seem to be a challenge:
-1. Where to start?
-2. How to organize the unit test??
-3. Use a mock, stub, both!?&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;To address these challenges I unusually recommend the following approach:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Identify the system under test&lt;/strong&gt;&lt;br /&gt;
-What are we actually going to test? First off, we only test public methods or behavior that is exposed. If we are practicing proper OOP, then everything else should be hidden. If we consider the Single Responsibility principle, then we should be isolating our test to a single unit or method in the system under test.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Organize your unit test using AAA&lt;/strong&gt;&lt;br /&gt;
-Now that we’ve identified what we are going to test, we organize our unit tests into an “Arrange”, “Act”, and “Assert” sections using comments. The extra key strokes may be a pain or make you feel like a total noob, but I think the mental tickler this provides is well worth it, besides just properly organizing your unit test to more easily identify its functional components. So starting just under the “Arrange” comment, we typically start with some kind of variable representing the system under test and using productivity tools such as ReSharper or CodeRush we begin developing the unit to test.  &lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Decide what kind of test you are going to write&lt;/strong&gt;&lt;br /&gt;
-What kind of test are we going to write? Will it be a state based test or an interactive based test? State based tests are designed to test outcomes, where as interactive based tests are design to test interactions between collaborators. If you are writing an interactive test, then you will probably be using a mock to assert some kind of behavior between the test method and an external dependency, usually the mock. If you are writing a state based test, then you will probably use a stub. Keep in mind, this is just a guideline. You might need both, depending on the complexity of your system under test. Rhino mocks actually allows you to mix and match mocks and stubs, a reason why it can be so confusing. Another way to look at it is that stubs are inputs to the system under test, where as mocks are inputs to the unit test itself. Roy Osherove wrote a short post explaining the differences between the two and when you should use them, on his blog. &lt;a href=&quot;http://osherove.com/blog/2007/9/16/mocks-and-stubs-the-difference-is-in-the-flow-of-information.html&quot;&gt;Mocks and Stubs - The difference is in the flow of information&lt;/a&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;c#&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// A contrived example of a simple unit test with a mock service&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;[Test]&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MyMethodShouldCallDoSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; 	&lt;span class=&quot;c1&quot;&gt;// Arrange&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 	&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sut&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SystemUnderTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; 	&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MockRepository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GenerateMock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMyService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;();&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 	&lt;span class=&quot;c1&quot;&gt;// Act&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;sut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; 	&lt;span class=&quot;c1&quot;&gt;// Assert&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 	&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AssertWasCalled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DoSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-</description>
-        <pubDate>Mon, 16 Jun 2014 16:21:56 -0500</pubDate>
-        <link>/2014/06/16/an-approach-to-tdd.html</link>
-        <guid isPermaLink="true">/2014/06/16/an-approach-to-tdd.html</guid>
-      </item>
-    
-      <item>
-        <title>Late night hacking</title>
-        <description>&lt;p&gt;My first post using jekyll static website template and GitHub Pages!&lt;/p&gt;
-
-&lt;p&gt;So!? What’s the big deal!? Nothing really. I started blogging a few years ago as means of capturing my thoughts and experiences getting back into software development after a 3 year hiatus. Honestly, I was so busy with work, family and improving my skills in whatever spare time I had, that I was not really active the first year. The following year I set a goal to at least write four blog posts; one per quarter. I actually exceeded my goal and wrote 6 posts. This year my goal was to write at least one post a month. I know, not very ambitious, but I’m being realistic with my commitments and obligations, so I think its a worthy goal.&lt;/p&gt;
-
-&lt;p&gt;Ok. Back to using jekyll and GitHub Pages. Why? Well my first site was with WordPress. WordPress is pretty awesome. It has a ton of features and you can get up and running very quickly; however, I was never able to find a theme I really liked and I spent way more time than I wanted to, trying to customize the themes I had. I also didn’t want to pay for hosting anymore. So I decided to cancel my hosting and started up a free blog using Blogger. Blogger has a lot of cool features too, but I didn’t like the themes that were available and really wanted to try something different. &lt;/p&gt;
-
-&lt;p&gt;I had heard about people using static website templates like jekyll and Octopress and the hacky nature of them and I was also aware that you could host a site on GitHub for free using these static website templates, so I was interested in trying it out. So here I am, writing my first post on my new blog site hosted on GitHub.&lt;/p&gt;
-
-&lt;p&gt;So far so good. I really like how I was able to quickly and easily setup the site with the look and feel I wanted. I also think its pretty awesome that I’m using html to write my posts and git to publish them. I’m a terrible speller, so spell check is something I’m seriously missing. For now, I’ll use word to write my posts and paste in. I’m not sure if there is anything I can do about that. Maybe there is a plug-in I could install on jekyll or in Sublime.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Sublime does support spell-check out of the box. On OSx it uses a standard US dictionary and is off by default. The keyboard shortcut is ‘F6’. &lt;/p&gt;
-</description>
-        <pubDate>Mon, 19 May 2014 19:25:01 -0500</pubDate>
-        <link>/2014/05/19/late-night-hacking.html</link>
-        <guid isPermaLink="true">/2014/05/19/late-night-hacking.html</guid>
       </item>
     
   </channel>
