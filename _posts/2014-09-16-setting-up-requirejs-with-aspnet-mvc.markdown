@@ -3,7 +3,7 @@ layout: post
 title:  "Setting up an ASP.NET MVC application with RequireJS and KnockoutJS"
 date:   2014-09-16 22:19:24
 categories: [MVC, RequireJS, KnockoutJS]
-tags: 	[]
+tags: 	[MVC, RequireJS, KnockoutJS]
 ---
 I'm currently working on an ASP.NET MVC project that uses RequireJS and KnockoutJS. If you don't know, RequireJS is an open source javascript library for loading javascript files and modules. RequireJS allows us to encapsulate code into a useful units (modules) and manage the dependencies to other units of javascript code. KnockoutJS is an open source javascript library for creating dynamic UIs. KnockoutJS uses the Model-View-View Model (MVVM) pattern to provide binding and dependency tracking between client side data models and the UI. 
 

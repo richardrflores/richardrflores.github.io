@@ -2,8 +2,8 @@
 layout: post
 title:  "EF Table Per Hierarchy (TPH) IsNull = False Error"
 date:   2015-03-25 20:00:00
-categories: ["Entity Framework, EF"]
-tags: 	["Entity Framework, EF"]
+categories: ["Entity Framework", EF]
+tags: 	["Entity Framework", EF]
 ---
 Today I had to refactor some domain models to a generalized hierarchy with EF. I used the TPH pattern defined by the EF team to split a JournalEntryHeader into a BillingRecordJournalEntryHeader and an InvoiceJournalEntryHeader in order to secure the domain models using the projects data entitlements paradigm.
 

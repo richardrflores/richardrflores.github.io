@@ -2,8 +2,8 @@
 layout: post
 title:  "Late night hacking"
 date:   2014-05-20 00:25:01
-categories: [hacking, blogging]
-tags: 	[jekyill]
+categories: [Miscellaneous]
+tags: 	[Miscellaneous]
 ---
 My first post using jekyll static website template and GitHub Pages!
 
