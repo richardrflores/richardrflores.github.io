@@ -22,6 +22,7 @@ I initially found out about GTD through Stephen Covey's 7 Habits book. In hindsi
 5. I did not have an effective decision making system. As I added things to my system, I would apply them to the role which they were applicable. This was not effective because it required too much thought. I had to decide what bucket to put it in, if I needed to tag it so I can find it later and what tag to use. The decision process was inconvenient and sometimes painful.
 
 6. I did not have an effective Reference system. Because I was relying on roles and tags to organize my things, my notes were all over the place. The lack of having an effective reference system also made the decision process harder.  
+
 7. I did not have an effective Project system. Many of my projects were organized by role. Going through each one to plan and organize effectively became difficult over time especially when I had to prioritize which role to focus on. Eventually this system broke down because I would often neglect the buckets that were not in the whirlwind. 
 
 8. Not getting Inbox to zero. As my systems decision, reference and project planning systems broke down, my Inbox grew out of control. I would sweep through every now and then, but it would quickly fill up and they cycle would resume.
