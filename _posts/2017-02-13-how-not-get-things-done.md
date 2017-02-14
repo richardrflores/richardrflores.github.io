@@ -5,7 +5,7 @@ date:   2017-02-13 09:30:00
 categories: [Productivity]
 tags: 	[Productivity]
 ---
-Last month I started an advanced business training program through my employer. It's a 13 week program that includes several modules on various topics. One of the topics we covered is on [Attention Management] (http://www.inc.com/lee-colan/manage-attention-not-time.html). This was a really interesting topic and required reading a couple of articles on the subject and David Allen's [Getting Things Done] (https://www.amazon.com/Getting-Things-Done-Stress-Free-Productivity/dp/0143126563/ref=dp_ob_title_bk) (GTD). 
+Last month I started an advanced business training program through my employer. It's a 13 week program that includes several modules on various topics. One of the topics we covered is on [Attention Management](http://www.inc.com/lee-colan/manage-attention-not-time.html). This was a really interesting topic and required reading a couple of articles on the subject and David Allen's [Getting Things Done](https://www.amazon.com/Getting-Things-Done-Stress-Free-Productivity/dp/0143126563/ref=dp_ob_title_bk) (GTD). 
 
 One of our assignments for this module was to describe how we would use GTD. As I began to describe my system, I could not help but think about why it didn't work for me in the past. I was actually familiar with GTD and used it in the past, but eventually stopped because it was a lot to keep up with and I was not really getting much benefit from it. And, here's why. 
 
