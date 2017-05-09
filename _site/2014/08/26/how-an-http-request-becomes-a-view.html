@@ -47,7 +47,7 @@
 
     <div class="large-9 columns" role="content">
       <h3><a href="#">How an HTTP Request Becomes an MVC View</a></h3>
-<h6>Aug 26, 2014 &nbsp; posted in  <a href="/categories">asp.net</a>  <a href="/categories">mvc</a> </h6>
+<h6>Aug 26, 2014 &nbsp; posted in  <a href="/categories">ASP.NET</a>  <a href="/categories">MVC</a> </h6>
 
 <p></p> 
 <div class="row">
@@ -77,119 +77,149 @@
 
 <p>Routing. When an MVC application starts the application stores a collection of pre-defined URL patterns, known as Routes, in the RouteCollection of the RouteTable object. The Routes are used to construct URLs dynamically. When an HTTP request is made the UrlRoutingModule finds the first route that matches the format of the URL request to create a RouteData object, which it then uses to create a RequestContext object.</p>
 
-<div class="highlight"><pre><code class="c#"><span class="lineno">1</span> <span class="c1">// An example of a URL request</span>
-<span class="lineno">2</span> <span class="n">http</span><span class="p">:</span><span class="c1">//server/application/Products/show/beverages</span>
-<span class="lineno">3</span> 
-<span class="lineno">4</span> <span class="c1">// A pre-defined URL pattern or route definition</span>
-<span class="lineno">5</span> <span class="p">{</span><span class="n">controller</span><span class="p">}/{</span><span class="n">action</span><span class="p">}/{</span><span class="n">id</span><span class="p">}</span>
-<span class="lineno">6</span> 
-<span class="lineno">7</span> <span class="c1">// The matching URL pattern</span>
-<span class="lineno">8</span> <span class="p">/</span><span class="n">Products</span><span class="p">/</span><span class="n">show</span><span class="p">/</span><span class="n">beverages</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-c#" data-lang="c#"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre><span class="c1">// An example of a URL request
+</span><span class="n">http</span><span class="p">:</span><span class="c1">//server/application/Products/show/beverages
+</span>
+<span class="c1">// A pre-defined URL pattern or route definition
+</span><span class="p">{</span><span class="n">controller</span><span class="p">}/{</span><span class="n">action</span><span class="p">}/{</span><span class="n">id</span><span class="p">}</span>
+
+<span class="c1">// The matching URL pattern
+</span><span class="p">/</span><span class="n">Products</span><span class="p">/</span><span class="n">show</span><span class="p">/</span><span class="n">beverages</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Controller Creation. The RequestContext from the Routing stage is used to create an instance of an MvcHandler, which is then used to create an instance of a controller matching the URL pattern of the HTTP request.</p>
 
-<div class="highlight"><pre><code class="c#"><span class="lineno"> 1</span> <span class="c1">// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. </span>
-<span class="lineno"> 2</span> <span class="c1">// See License.txt in the project root for license information.</span>
-<span class="lineno"> 3</span> 
-<span class="lineno"> 4</span> <span class="k">private</span> <span class="k">void</span> <span class="nf">ProcessRequestInit</span><span class="p">(</span><span class="n">HttpContextBase</span> <span class="n">httpContext</span><span class="p">,</span> <span class="k">out</span> <span class="n">IController</span> <span class="n">controller</span><span class="p">,</span> <span class="k">out</span> <span class="n">IControllerFactory</span> <span class="n">factory</span><span class="p">)</span>
-<span class="lineno"> 5</span> <span class="p">{</span>
-<span class="lineno"> 6</span>     <span class="c1">// If request validation has already been enabled, make it lazy. This allows attributes like [HttpPost] (which looks</span>
-<span class="lineno"> 7</span>     <span class="c1">// at Request.Form) to work correctly without triggering full validation.</span>
-<span class="lineno"> 8</span>     <span class="c1">// Tolerate null HttpContext for testing.</span>
-<span class="lineno"> 9</span>     <span class="n">HttpContext</span> <span class="n">currentContext</span> <span class="p">=</span> <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">;</span>
-<span class="lineno">10</span>     <span class="k">if</span> <span class="p">(</span><span class="n">currentContext</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
-<span class="lineno">11</span>     <span class="p">{</span>
-<span class="lineno">12</span>         <span class="kt">bool?</span> <span class="n">isRequestValidationEnabled</span> <span class="p">=</span> <span class="n">ValidationUtility</span><span class="p">.</span><span class="n">IsValidationEnabled</span><span class="p">(</span><span class="n">currentContext</span><span class="p">);</span>
-<span class="lineno">13</span>         <span class="k">if</span> <span class="p">(</span><span class="n">isRequestValidationEnabled</span> <span class="p">==</span> <span class="k">true</span><span class="p">)</span>
-<span class="lineno">14</span>         <span class="p">{</span>
-<span class="lineno">15</span>             <span class="n">ValidationUtility</span><span class="p">.</span><span class="n">EnableDynamicValidation</span><span class="p">(</span><span class="n">currentContext</span><span class="p">);</span>
-<span class="lineno">16</span>         <span class="p">}</span>
-<span class="lineno">17</span>     <span class="p">}</span>
-<span class="lineno">18</span> 
-<span class="lineno">19</span>     <span class="n">AddVersionHeader</span><span class="p">(</span><span class="n">httpContext</span><span class="p">);</span>
-<span class="lineno">20</span>     <span class="n">RemoveOptionalRoutingParameters</span><span class="p">();</span>
-<span class="lineno">21</span> 
-<span class="lineno">22</span>     <span class="c1">// Get the controller type</span>
-<span class="lineno">23</span>     <span class="kt">string</span> <span class="n">controllerName</span> <span class="p">=</span> <span class="n">RequestContext</span><span class="p">.</span><span class="n">RouteData</span><span class="p">.</span><span class="n">GetRequiredString</span><span class="p">(</span><span class="s">&quot;controller&quot;</span><span class="p">);</span>
-<span class="lineno">24</span> 
-<span class="lineno">25</span>     <span class="c1">// Instantiate the controller and call Execute</span>
-<span class="lineno">26</span>     <span class="n">factory</span> <span class="p">=</span> <span class="n">ControllerBuilder</span><span class="p">.</span><span class="n">GetControllerFactory</span><span class="p">();</span>
-<span class="lineno">27</span>     <span class="n">controller</span> <span class="p">=</span> <span class="n">factory</span><span class="p">.</span><span class="n">CreateController</span><span class="p">(</span><span class="n">RequestContext</span><span class="p">,</span> <span class="n">controllerName</span><span class="p">);</span>
-<span class="lineno">28</span>     <span class="k">if</span> <span class="p">(</span><span class="n">controller</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
-<span class="lineno">29</span>     <span class="p">{</span>
-<span class="lineno">30</span>         <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidOperationException</span><span class="p">(</span>
-<span class="lineno">31</span>             <span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span>
-<span class="lineno">32</span>                 <span class="n">CultureInfo</span><span class="p">.</span><span class="n">CurrentCulture</span><span class="p">,</span>
-<span class="lineno">33</span>                 <span class="n">MvcResources</span><span class="p">.</span><span class="n">ControllerBuilder_FactoryReturnedNull</span><span class="p">,</span>
-<span class="lineno">34</span>                 <span class="n">factory</span><span class="p">.</span><span class="n">GetType</span><span class="p">(),</span>
-<span class="lineno">35</span>                 <span class="n">controllerName</span><span class="p">));</span>
-<span class="lineno">36</span>     <span class="p">}</span>
-<span class="lineno">37</span> <span class="p">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-c#" data-lang="c#"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre></td><td class="code"><pre><span class="c1">// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. 
+// See License.txt in the project root for license information.
+</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">ProcessRequestInit</span><span class="p">(</span><span class="n">HttpContextBase</span> <span class="n">httpContext</span><span class="p">,</span> <span class="k">out</span> <span class="n">IController</span> <span class="n">controller</span><span class="p">,</span> <span class="k">out</span> <span class="n">IControllerFactory</span> <span class="n">factory</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// If request validation has already been enabled, make it lazy. This allows attributes like [HttpPost] (which looks
+</span>    <span class="c1">// at Request.Form) to work correctly without triggering full validation.
+</span>    <span class="c1">// Tolerate null HttpContext for testing.
+</span>    <span class="n">HttpContext</span> <span class="n">currentContext</span> <span class="p">=</span> <span class="n">HttpContext</span><span class="p">.</span><span class="n">Current</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">currentContext</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">bool</span><span class="p">?</span> <span class="n">isRequestValidationEnabled</span> <span class="p">=</span> <span class="n">ValidationUtility</span><span class="p">.</span><span class="nf">IsValidationEnabled</span><span class="p">(</span><span class="n">currentContext</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isRequestValidationEnabled</span> <span class="p">==</span> <span class="k">true</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ValidationUtility</span><span class="p">.</span><span class="nf">EnableDynamicValidation</span><span class="p">(</span><span class="n">currentContext</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-<p>Action Invocation. Once the controller matching the HTTP request is created, the ControllerActionInvoker uses the ControllerContext, which has information about the HTTP request, to determine the action method of the controller class to call, and then calls that method. </p>
+    <span class="nf">AddVersionHeader</span><span class="p">(</span><span class="n">httpContext</span><span class="p">);</span>
+    <span class="nf">RemoveOptionalRoutingParameters</span><span class="p">();</span>
 
-<div class="highlight"><pre><code class="c#"><span class="c1">// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. </span>
-<span class="c1">// See License.txt in the project root for license information.</span>
+    <span class="c1">// Get the controller type
+</span>    <span class="kt">string</span> <span class="n">controllerName</span> <span class="p">=</span> <span class="n">RequestContext</span><span class="p">.</span><span class="n">RouteData</span><span class="p">.</span><span class="nf">GetRequiredString</span><span class="p">(</span><span class="s">"controller"</span><span class="p">);</span>
 
+    <span class="c1">// Instantiate the controller and call Execute
+</span>    <span class="n">factory</span> <span class="p">=</span> <span class="n">ControllerBuilder</span><span class="p">.</span><span class="nf">GetControllerFactory</span><span class="p">();</span>
+    <span class="n">controller</span> <span class="p">=</span> <span class="n">factory</span><span class="p">.</span><span class="nf">CreateController</span><span class="p">(</span><span class="n">RequestContext</span><span class="p">,</span> <span class="n">controllerName</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">controller</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidOperationException</span><span class="p">(</span>
+            <span class="n">String</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span>
+                <span class="n">CultureInfo</span><span class="p">.</span><span class="n">CurrentCulture</span><span class="p">,</span>
+                <span class="n">MvcResources</span><span class="p">.</span><span class="n">ControllerBuilder_FactoryReturnedNull</span><span class="p">,</span>
+                <span class="n">factory</span><span class="p">.</span><span class="nf">GetType</span><span class="p">(),</span>
+                <span class="n">controllerName</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Action Invocation. Once the controller matching the HTTP request is created, the ControllerActionInvoker uses the ControllerContext, which has information about the HTTP request, to determine the action method of the controller class to call, and then calls that method.</p>
+
+<figure class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="c1">// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. 
+// See License.txt in the project root for license information.
+</span>
 <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ExecuteCore</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="c1">// If code in this method needs to be updated, please also check the BeginExecuteCore() and</span>
-    <span class="c1">// EndExecuteCore() methods of AsyncController to see if that code also must be updated.</span>
-
-    <span class="n">PossiblyLoadTempData</span><span class="p">();</span>
+    <span class="c1">// If code in this method needs to be updated, please also check the BeginExecuteCore() and
+</span>    <span class="c1">// EndExecuteCore() methods of AsyncController to see if that code also must be updated.
+</span>
+    <span class="nf">PossiblyLoadTempData</span><span class="p">();</span>
     <span class="k">try</span>
     <span class="p">{</span>
-        <span class="kt">string</span> <span class="n">actionName</span> <span class="p">=</span> <span class="n">GetActionName</span><span class="p">(</span><span class="n">RouteData</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(!</span><span class="n">ActionInvoker</span><span class="p">.</span><span class="n">InvokeAction</span><span class="p">(</span><span class="n">ControllerContext</span><span class="p">,</span> <span class="n">actionName</span><span class="p">))</span>
+        <span class="kt">string</span> <span class="n">actionName</span> <span class="p">=</span> <span class="nf">GetActionName</span><span class="p">(</span><span class="n">RouteData</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">ActionInvoker</span><span class="p">.</span><span class="nf">InvokeAction</span><span class="p">(</span><span class="n">ControllerContext</span><span class="p">,</span> <span class="n">actionName</span><span class="p">))</span>
         <span class="p">{</span>
-            <span class="n">HandleUnknownAction</span><span class="p">(</span><span class="n">actionName</span><span class="p">);</span>
+            <span class="nf">HandleUnknownAction</span><span class="p">(</span><span class="n">actionName</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="k">finally</span>
     <span class="p">{</span>
-        <span class="n">PossiblySaveTempData</span><span class="p">();</span>
+        <span class="nf">PossiblySaveTempData</span><span class="p">();</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></figure>
 
-<p>Result Execution. The action method receives user input, prepares the appropriate response data, and then executes the result by returning a result type such as ViewResult, which renders a view and is the most-often used result type. A view contains the HTML markup and content that is sent to the browser. </p>
+<p>Result Execution. The action method receives user input, prepares the appropriate response data, and then executes the result by returning a result type such as ViewResult, which renders a view and is the most-often used result type. A view contains the HTML markup and content that is sent to the browser.</p>
 
-<div class="highlight"><pre><code class="c#"><span class="c1">// Example of About Action from the MVC new project template</span>
-<span class="c1">// Note: ViewResult is derived from ActionResult</span>
-<span class="k">public</span> <span class="n">ActionResult</span> <span class="nf">About</span><span class="p">()</span>
+<figure class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="c1">// Example of About Action from the MVC new project template
+// Note: ViewResult is derived from ActionResult
+</span><span class="k">public</span> <span class="n">ActionResult</span> <span class="nf">About</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="n">ViewData</span><span class="p">[</span><span class="s">&quot;Title&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&quot;About Page&quot;</span><span class="p">;</span>
+    <span class="n">ViewData</span><span class="p">[</span><span class="s">"Title"</span><span class="p">]</span> <span class="p">=</span> <span class="s">"About Page"</span><span class="p">;</span>
 
     <span class="k">return</span> <span class="nf">View</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="cm">/* The view that is rendered. */</span>
 
-    <span class="n">ViewBag</span><span class="p">.</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&quot;About&quot;</span><span class="p">;</span>
+    <span class="n">ViewBag</span><span class="p">.</span><span class="n">Title</span> <span class="p">=</span> <span class="s">"About"</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="p">&lt;</span><span class="n">h2</span><span class="p">&gt;</span><span class="n">@ViewBag</span><span class="p">.</span><span class="n">Title</span><span class="p">.&lt;/</span><span class="n">h2</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="n">h3</span><span class="p">&gt;</span><span class="n">@ViewBag</span><span class="p">.</span><span class="n">Message</span><span class="p">&lt;/</span><span class="n">h3</span><span class="p">&gt;</span>
 
-<span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">Use</span> <span class="k">this</span> <span class="n">area</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">additional</span> <span class="n">information</span><span class="p">.&lt;/</span><span class="n">p</span><span class="p">&gt;</span></code></pre></div>
+<span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">Use</span> <span class="k">this</span> <span class="n">area</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">additional</span> <span class="n">information</span><span class="p">.&lt;/</span><span class="n">p</span><span class="p">&gt;</span></code></pre></figure>
 
     </div>
 </div>
 <div class="row">
 	<div class="large-12 columns">
-    	
-    		    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'thereprogram'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     	
     </div>
 </div>

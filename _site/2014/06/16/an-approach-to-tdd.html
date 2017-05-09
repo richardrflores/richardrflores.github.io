@@ -47,17 +47,19 @@
 
     <div class="large-9 columns" role="content">
       <h3><a href="#">An approach to TDD</a></h3>
-<h6>Jun 16, 2014 &nbsp; posted in  <a href="/categories">tdd</a> </h6>
+<h6>Jun 16, 2014 &nbsp; posted in  <a href="/categories">TDD</a> </h6>
 
 <p></p> 
 <div class="row">
 	<div class="large-12 columns">
     	<p>Over the past few months I’ve had to coach some junior developers on how to TDD. Although most of the devs I’ve been working with are knowledgeable about TDD, putting it to practice seems to be a challenge. Most of them know how to write unit tests, but are not actually practicing TDD where the development of tests drives the development of the code. Instead, they are writing the code first and then bolting tests on afterward. Although this approach works, it is not TDD; it’s unit testing. And unfortunately, misses the main benefit of TDD which is to write testable code that adheres to SOLID design principles; in particular Interface Segregation and Dependency Injection.</p>
 
-<p>So I get that writing tests for things that you are not familiar with can be challenging. I’m definitely guilty of that! I’ll typically hack around for a little bit to explore something I’m not familiar with to try and figure out how I can test it. Ideally, this is probably where you would actually <em>want</em> to start writing tests. I know, it’s crazy right! Anyway, this is not really the case with the devs I’ve been working with. There are a few things that seem to be a challenge:
-1. Where to start?
-2. How to organize the unit test??
-3. Use a mock, stub, both!?</p>
+<p>So I get that writing tests for things that you are not familiar with can be challenging. I’m definitely guilty of that! I’ll typically hack around for a little bit to explore something I’m not familiar with to try and figure out how I can test it. Ideally, this is probably where you would actually <em>want</em> to start writing tests. I know, it’s crazy right! Anyway, this is not really the case with the devs I’ve been working with. There are a few things that seem to be a challenge:</p>
+<ol>
+  <li>Where to start?</li>
+  <li>How to organize the unit test??</li>
+  <li>Use a mock, stub, both!?</li>
+</ol>
 
 <p><strong>To address these challenges I unusually recommend the following approach:</strong></p>
 
@@ -65,47 +67,47 @@
 What are we actually going to test? First off, we only test public methods or behavior that is exposed. If we are practicing proper OOP, then everything else should be hidden. If we consider the Single Responsibility principle, then we should be isolating our test to a single unit or method in the system under test.</p>
 
 <p><strong>Organize your unit test using AAA</strong><br />
-Now that we’ve identified what we are going to test, we organize our unit tests into an “Arrange”, “Act”, and “Assert” sections using comments. The extra key strokes may be a pain or make you feel like a total noob, but I think the mental tickler this provides is well worth it, besides just properly organizing your unit test to more easily identify its functional components. So starting just under the “Arrange” comment, we typically start with some kind of variable representing the system under test and using productivity tools such as ReSharper or CodeRush we begin developing the unit to test.  </p>
+Now that we’ve identified what we are going to test, we organize our unit tests into an “Arrange”, “Act”, and “Assert” sections using comments. The extra key strokes may be a pain or make you feel like a total noob, but I think the mental tickler this provides is well worth it, besides just properly organizing your unit test to more easily identify its functional components. So starting just under the “Arrange” comment, we typically start with some kind of variable representing the system under test and using productivity tools such as ReSharper or CodeRush we begin developing the unit to test.</p>
 
 <p><strong>Decide what kind of test you are going to write</strong><br />
 What kind of test are we going to write? Will it be a state based test or an interactive based test? State based tests are designed to test outcomes, where as interactive based tests are design to test interactions between collaborators. If you are writing an interactive test, then you will probably be using a mock to assert some kind of behavior between the test method and an external dependency, usually the mock. If you are writing a state based test, then you will probably use a stub. Keep in mind, this is just a guideline. You might need both, depending on the complexity of your system under test. Rhino mocks actually allows you to mix and match mocks and stubs, a reason why it can be so confusing. Another way to look at it is that stubs are inputs to the system under test, where as mocks are inputs to the unit test itself. Roy Osherove wrote a short post explaining the differences between the two and when you should use them, on his blog. <a href="http://osherove.com/blog/2007/9/16/mocks-and-stubs-the-difference-is-in-the-flow-of-information.html">Mocks and Stubs - The difference is in the flow of information</a>.</p>
 
-<div class="highlight"><pre><code class="c#"><span class="lineno"> 1</span> <span class="c1">// A contrived example of a simple unit test with a mock service</span>
-<span class="lineno"> 2</span> 
-<span class="lineno"> 3</span> <span class="na">[Test]</span>
-<span class="lineno"> 4</span> <span class="k">public</span> <span class="k">void</span> <span class="nf">MyMethodShouldCallDoSomething</span><span class="p">()</span>
-<span class="lineno"> 5</span> <span class="p">{</span>
-<span class="lineno"> 6</span> 	<span class="c1">// Arrange</span>
-<span class="lineno"> 7</span> 	<span class="kt">var</span> <span class="n">sut</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SystemUnderTest</span><span class="p">();</span>
-<span class="lineno"> 8</span> 	<span class="kt">var</span> <span class="n">service</span> <span class="p">=</span> <span class="n">MockRepository</span><span class="p">.</span><span class="n">GenerateMock</span><span class="p">&lt;</span><span class="n">IMyService</span><span class="p">&gt;();</span> 
-<span class="lineno"> 9</span> 
-<span class="lineno">10</span> 	<span class="c1">// Act</span>
-<span class="lineno">11</span>      <span class="n">sut</span><span class="p">.</span><span class="n">MyMethod</span><span class="p">()</span>
-<span class="lineno">12</span> 
-<span class="lineno">13</span> 	<span class="c1">// Assert</span>
-<span class="lineno">14</span> 	<span class="n">service</span><span class="p">.</span><span class="n">AssertWasCalled</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">DoSomething</span><span class="p">);</span>
-<span class="lineno">15</span> <span class="p">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-c#" data-lang="c#"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="c1">// A contrived example of a simple unit test with a mock service
+</span>
+<span class="na">[Test]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">MyMethodShouldCallDoSomething</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// Arrange
+</span>	<span class="kt">var</span> <span class="n">sut</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">SystemUnderTest</span><span class="p">();</span>
+	<span class="kt">var</span> <span class="n">service</span> <span class="p">=</span> <span class="n">MockRepository</span><span class="p">.</span><span class="n">GenerateMock</span><span class="p">&lt;</span><span class="n">IMyService</span><span class="p">&gt;();</span> 
+
+	<span class="c1">// Act
+</span>     <span class="n">sut</span><span class="p">.</span><span class="nf">MyMethod</span><span class="p">()</span>
+
+	<span class="c1">// Assert
+</span>	<span class="n">service</span><span class="p">.</span><span class="nf">AssertWasCalled</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">DoSomething</span><span class="p">);</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 
     </div>
 </div>
 <div class="row">
 	<div class="large-12 columns">
-    	
-    		    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'thereprogram'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     	
     </div>
 </div>
