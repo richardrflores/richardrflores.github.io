@@ -4,6 +4,7 @@ title:  "Coercion of types (soft casting)"
 date:   2015-03-18 14:30:00
 categories: ["C#"]
 tags: 	["C#"]
+comments: true
 ---
 Today a colleague of mine used the word "coercion" when referring to a soft cast in code. Some thoughts I captured about this.
 

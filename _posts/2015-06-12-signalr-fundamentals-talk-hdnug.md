@@ -4,6 +4,7 @@ title:  "SignalR Fundamentals Talk"
 date:   2015-06-12 08:00:00
 categories: [Speaking, SignalR]
 tags: 	[Speaking, SignalR]
+comments: true
 ---
 I had the pleasure of a giving a talk to the Houston Dot Net User Group yesterday evening about fundamental concepts related to SignalR. I had a really good time, thanks to all in attendance!
 

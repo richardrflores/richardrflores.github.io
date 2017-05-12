@@ -4,6 +4,7 @@ title:  "Recommended Readings on Software Development"
 date: 2014-07-21 22:16:41  
 categories: [Books]
 tags: 	[Books, Reading]
+comments: true
 ---
 Below is my list of recommended readings on software development. These books have provided the basis of my knowledge on software design and software development practices in general. I highly recommend these books for junior developers interested in growing or possibly transitioning to software delivery.
 

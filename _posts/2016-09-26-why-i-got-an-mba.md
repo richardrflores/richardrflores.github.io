@@ -4,6 +4,7 @@ title:  "Why I got a MBA"
 date:   2016-09-26 09:25:00
 categories: [Miscellaneous, MBA]
 tags: 	[Miscellaneous, MBA]
+comments: true
 ---
 The last year and a half I've been working on completing an MBA. And, as of May 2016, I am the proud recipient of a MBA from Webster University George Herbert Walker School of Business!
 

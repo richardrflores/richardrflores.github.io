@@ -4,6 +4,7 @@ title:  "How I Get Things Done...Now"
 date:   2017-05-01 09:54:00
 categories: [Productivity]
 tags: [Productivity]
+comments: true
 ---
 After getting through a bulk of the GTD book, the idea of clearing your mind is something that resonated with me and motivated me to try it again; albeit with some minor improvements. 
 

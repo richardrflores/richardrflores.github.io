@@ -4,6 +4,7 @@ title:  "An approach to TDD"
 date:   2014-06-16 21:21:56
 categories: ["TDD"]
 tags: 	["TDD"]
+comments: true
 ---
 Over the past few months I've had to coach some junior developers on how to TDD. Although most of the devs I've been working with are knowledgeable about TDD, putting it to practice seems to be a challenge. Most of them know how to write unit tests, but are not actually practicing TDD where the development of tests drives the development of the code. Instead, they are writing the code first and then bolting tests on afterward. Although this approach works, it is not TDD; it's unit testing. And unfortunately, misses the main benefit of TDD which is to write testable code that adheres to SOLID design principles; in particular Interface Segregation and Dependency Injection.
 

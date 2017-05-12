@@ -4,6 +4,7 @@ title:  "TDD and Unit Testing Without Mocks"
 date:   2014-07-09 17:33:05
 categories: [TDD, "Unit Testing"]
 tags: 	[TDD, Mocks, "Unit Testing"]
+comments: true
 ---
 
 About a month or so ago, on a trip to a conference, during dinner, my colleagues and I had a conversation around the use of mocks in unit testing. Not surprisingly it was a passionate conversation on the premise that mocks are bad and should be avoided because it can lead to poor testing form and ultimately sub-optimal design. The conversation was not only entertaining but very interesting, so I took some time to look into it further and form my own opinions.

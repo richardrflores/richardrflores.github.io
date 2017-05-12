@@ -5,6 +5,7 @@ date: 2014-12-09 21:56:25
 published: true
 categories: [MVC, RequireJS, KnockoutJS]
 tags: [MVC, RequireJS, KnockoutJS]
+comments: true
 ---
 In this post I want to improve upon the setup I covered in the previous post [Setting up an ASP.NET MVC application with RequireJS and KnockoutJS]({% post_url 2014-09-16-setting-up-requirejs-with-aspnet-mvc %})
 

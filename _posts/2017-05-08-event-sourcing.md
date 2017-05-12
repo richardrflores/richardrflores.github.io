@@ -4,6 +4,7 @@ title:  "Event Sourcing"
 date:   2017-05-08 09:58:00
 categories: [Event Sourcing]
 tags: 	[Event Sourcing]
+comments: true
 ---
 I recently took an interest in CQRS (Command Query Responsibility Segregation) to learn how it's used with DDD (Domain Driven Design) for a project I’m working on. CQRS is an architectural pattern that separates a system into two distinct parts, which either changes the state of the system or reads its current state. While on my CQRS journey, I came across several articles and posts which covered Event Sourcing (ES). This was really interesting to me so went in a little deeper to get a better understanding. Here’s what I know.
 

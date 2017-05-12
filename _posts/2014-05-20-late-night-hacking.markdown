@@ -4,6 +4,7 @@ title:  "Late night hacking"
 date:   2014-05-20 00:25:01
 categories: [Miscellaneous]
 tags: 	[Miscellaneous]
+comments: true
 ---
 My first post using jekyll static website template and GitHub Pages!
 

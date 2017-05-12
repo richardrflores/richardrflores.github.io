@@ -4,7 +4,7 @@ layout: default
 
 {% for post in site.posts %}
 <h3><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
-<h6>{{ post.date | date: "%b %-d, %Y" }} &nbsp; posted in {% for category in post.categories %} <a href="{{ '/categories' | prepend: site.baseurl }}">{{ category }}</a> {% endfor %} &nbsp; <a href="{{ post.url | prepend: site.baseurl }}#disqus_thread">Comments</a></h6>
+<h6>{{ post.date | date: "%b %-d, %Y" }} &nbsp; posted in {% for category in post.categories %} <a href="{{ '/categories' | prepend: site.baseurl }}">{{ category }}</a> {% endfor %} &nbsp; <a href="{{ post.url | prepend: site.baseurl }}#disqus_thread"></a></h6>
 
 <p>{% if post.meta %} • {{ post.meta }}{% endif %}</p> 
 <div class="row">

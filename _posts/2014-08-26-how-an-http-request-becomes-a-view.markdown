@@ -4,6 +4,7 @@ title:  "How an HTTP Request Becomes an MVC View"
 date: 2014-08-26 21:03:00  
 categories: [ASP.NET, MVC]
 tags: 	[ASP.NET, MVC]
+comments: true
 ---
 How does a request for a URL become HTML in an ASP.NET MVC application? This information can be easily found by doing a basic search for the ASP.NET http request cycle. This process is pretty well documented, on both [MSDN](http://msdn.microsoft.com/en-us/library/dd381612(v=vs.100).aspx) and the [ASP.NET website](http://www.asp.net/mvc/tutorials/mvc-5/lifecycle-of-an-aspnet-mvc-5-application), so I recommend you go there for a more detailed explanation of the process. So the purpose of this post is for me to articulate how an HTTP Request becomes an MVC View while highlighting the interesting parts.
 
