@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EF Table Per Hierarchy (TPH) IsNull = False Error</title>
+    <title>Essential Charachteristics Of Domain Events</title>
     <meta name="description" content="A blog about programming and software development by Richard Flores.">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300,700,|Oswald:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/normalize.css">
@@ -46,28 +46,22 @@
     <!-- Main Blog Content -->
 
     <div class="large-9 columns" role="content">
-      <h3><a href="#">EF Table Per Hierarchy (TPH) IsNull = False Error</a></h3>
-<h6>Mar 25, 2015 &nbsp; posted in  <a href="/categories">Entity Framework</a>  <a href="/categories">EF</a> </h6>
+      <h3><a href="#">Essential Charachteristics Of Domain Events</a></h3>
+<h6>May 24, 2017 &nbsp; posted in  <a href="/categories">DDD</a> </h6>
 
 <p></p> 
 <div class="row">
 	<div class="large-12 columns">
-    	<p>Today I had to refactor some domain models to a generalized hierarchy with EF. I used the TPH pattern defined by the EF team to split a JournalEntryHeader into a BillingRecordJournalEntryHeader and an InvoiceJournalEntryHeader in order to secure the domain models using the projects data entitlements paradigm.</p>
+    	<p>In my post on <a href="http://richardrflores.com/2017/05/08/event-sourcing.html">event sourcing</a>, I briefly described event sourcing and touched on appropriate usages. I’m planning on writing some more about usages, but for now I wanted to share my notes on the fundamental thing we are dealing with when using event sourcing—Events.</p>
 
-<p>Not so fast!</p>
-
-<p>I hit a couple of blocks. The main reason is that we were trying to use two different discriminator columns. I kept getting a “IsNull=False” error. Although syntactically it was implemented correctly, it did not work. I then tried to use a type property that we have that actually would have worked better, but I ran into the same problem. This was troubling because we have this working somewhere else in the solution…More on that later.</p>
-
-<p>A few things I discovered:</p>
-<ol>
-  <li>The EF mapping configuration Map method takes either a string to map the property or a lambda.</li>
-  <li>If using the string, then the HasValue method must specify a value to use as a discriminator. If using the lambda, then you must use the HasValue method; in this case the HasValue does not require you to specify a discriminator value; I assume you could use a predicate to check against in the lambda.</li>
-  <li>Using the lambda syntax, you cannot use an enum as the property to discriminate because EF will try to convert the value to primitive type, which throws an exception. If your discriminator is an enum then use the string syntax.</li>
-</ol>
-
-<p>After several iterations and several searches, I realized that the error was the result of using a mapped property as a discriminator. This seemed to be the most common issue others experienced; this usage does not appear to be supported. As I mentioned earlier, we have this working somewhere else. After reviewing that implementation, I noticed that the property being used as a discriminator is not  defined on the super class of the implementing class; instead, it’s defined one more level up. Since it’s not acting as a property and discriminator on the super class, then EF does not seem to care.</p>
-
-<p>Ultimately, I added another property to use only as a discriminator.</p>
+<p>The essential characteristics of events are:</p>
+<ul>
+  <li>They occur in the past are typically emitted from an aggregate in response to an action. In the case of a ShoppingCart, “ItemAdded”, “ItemRemoved”.</li>
+  <li>They are immutable. Since domain events are a record of a change occurring in the past, they cannot be changed or undone. Subsequent events can alter or reverse the state of the domain. Such as “OrderModified”, or “OrderCanceled”.</li>
+  <li>Events are one way. Events can only be emitted (published) from a single source. There can be multiple subscribers to an event.</li>
+  <li>Events should contain information about the event, such as a key identifying the source of the event, and any additional information relative to the domain.</li>
+  <li>Events should describe the intent of the business beyond the name of the event. For example, “Order 1000 was created by customer jsmith”.</li>
+</ul>
 
     </div>
 </div>
@@ -82,8 +76,8 @@
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
 
 var disqus_config = function () {
-this.page.url = 'http://localhost:4000/2015/03/25/ef-table-per-hierarchy-is-null-false.html';  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = '/2015/03/25/ef-table-per-hierarchy-is-null-false'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+this.page.url = 'http://localhost:4000/2017/05/24/essential-charachteristics-of-domain-events.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2017/05/24/essential-charachteristics-of-domain-events'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE

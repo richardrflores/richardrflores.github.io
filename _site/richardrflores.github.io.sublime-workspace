@@ -1,0 +1,696 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Require",
+				"RequireKoPlayground"
+			],
+			[
+				"k",
+				"KnockoutJS"
+			],
+			[
+				"depen",
+				"dependencies"
+			],
+			[
+				"Requi",
+				"RequireJS"
+			],
+			[
+				"require",
+				"requirejs"
+			],
+			[
+				"Kno",
+				"KnockoutJS"
+			],
+			[
+				"y",
+				"yfm	Yml Front Matter Snippet"
+			],
+			[
+				"h",
+				"highlight	highlight"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"pa",
+				"padding"
+			],
+			[
+				"list",
+				"list-style-type"
+			],
+			[
+				"base",
+				"baseurl"
+			],
+			[
+				"upper",
+				"uppercase"
+			],
+			[
+				"tex",
+				"text-transform"
+			],
+			[
+				"fo",
+				"font-family"
+			],
+			[
+				"paddin",
+				"padding-top"
+			],
+			[
+				"ma",
+				"margin-bottom"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"strin",
+				"string-like"
+			],
+			[
+				"non",
+				"non-string-like"
+			],
+			[
+				"me",
+				"method_name"
+			],
+			[
+				"metho",
+				"method_name"
+			],
+			[
+				"mess",
+				"messages_sent"
+			],
+			[
+				"No",
+				"NoMethodError  (class)"
+			],
+			[
+				"class",
+				"class_level_wag"
+			],
+			[
+				"clas",
+				"class_level_wag"
+			],
+			[
+				"al",
+				"always_run"
+			],
+			[
+				"ex",
+				"exception_handled"
+			],
+			[
+				"Sta",
+				"StandardError"
+			],
+			[
+				"Ru",
+				"RuntimeError"
+			],
+			[
+				"Tra",
+				"TriangleError"
+			],
+			[
+				"equ",
+				"equilateral"
+			],
+			[
+				"tru",
+				"true_stuff"
+			],
+			[
+				"tr",
+				"true_stuff"
+			],
+			[
+				"fals",
+				"false_value"
+			],
+			[
+				"John",
+				"Johnson"
+			],
+			[
+				"new",
+				"newPostFormHTML"
+			],
+			[
+				"r",
+				"readlinkSync  (function)"
+			],
+			[
+				"in",
+				"input	Tag"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"fu",
+				"function"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"",
+				"Code Folding: Unfold All"
+			],
+			[
+				"Packag",
+				"Package Control: Install Package"
+			],
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"sass",
+				"Set Syntax: Sass"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"fet",
+				"Fetch: Manage"
+			],
+			[
+				"clos",
+				"Project: Close"
+			],
+			[
+				"ope",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"fe",
+				"Fetch"
+			],
+			[
+				"fetch",
+				"Fetch"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"sni",
+				"Snippet: html"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"new",
+				"File: New View into File"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 561.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/Richard/richardrflores.github.io/about.md",
+		"/Users/Richard/richardrflores.github.io/_layouts/page.html",
+		"/Users/Richard/richardrflores.github.io/_includes/header.html",
+		"/Users/Richard/Projects/Playground/greeter.js",
+		"/Users/Richard/richardrflores.github.io/_posts/2017-02-13-how-not-get-things-done.md",
+		"/Users/Richard/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/Richard/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/Richard/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/Richard/Library/Application Support/Sublime Text 2/Packages/User/Markdown.sublime-settings",
+		"/Users/Richard/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/Richard/richardrflores.github.io/_posts/2014-05-20-late-night-hacking.markdown",
+		"/Users/Richard/richardrflores.github.io/_posts/2014-09-16-setting-up-requirejs-with-aspnet-mvc.markdown",
+		"/Users/Richard/richardrflores.github.io/_posts/2014-12-09-improving-requirejs-setup-with-aspnet-mvc.md",
+		"/Users/Richard/richardrflores.github.io/_posts/2016-09-26-why-i-got-an-mba",
+		"/Users/Richard/richardrflores.github.io/_posts/2015-03-25-ef-table-per-hierarchy-is-null-false.md",
+		"/Users/Richard/richardrflores.github.io/_posts/2015-06-12-signalr-fundamentals-talk-hdnug.md",
+		"/Users/Richard/richardrflores.github.io/_drafts/2014-05-19-welcome-to-jekyll.markdown",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/Gemfile",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/assets/javascripts/application.js",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/assets/javascripts/main.js",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/assets/javascripts/authors/index.js",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/views/authors/templates/mytemplate.html",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/assets/javascripts/authors/viewModels/authorsViewModel.js",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/views/layouts/application.html.erb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/config/application.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/config/environments/development.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/views/authors/index.html.erb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/config/requirejs.yml",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/views/authors/templates/mytempate.html",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/assets/javascripts/authors.js",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app.json",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/config/routes.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/controllers/authors_controller.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/models/post.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/models/author.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/views/layouts/_messages.html.erb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/views/layouts/_navigation.html.erb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/views/layouts/_navigation_links.html.erb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/controllers/visitors_controller.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/controllers/authorsController.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/db/migrate/20151101165404_create_authors.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/models/Post.rb",
+		"/Users/Richard/RailsProjects/FoundationRailsApp/app/models/Author.rb",
+		"/Users/Richard/RailsProjects/Foundation/config/database.yml",
+		"/Users/Richard/richardrflores.github.io/_posts/2015-03-18-coercion-of-types-soft-casting.md",
+		"/Users/Richard/richardrflores.github.io/_posts/2014-06-16-an-approach-to-tdd.markdown",
+		"/Users/Richard/richardrflores.github.io/_drafts/2014-12-10-quality-of-unit-tests.md",
+		"/Users/Richard/richardrflores.github.io/_posts/2014-09-13-houstontechfest-talk.markdown",
+		"/Users/Richard/richardrflores.github.io/css/site.css",
+		"/Users/Richard/richardrflores.github.io/_posts/2014-08-26-how-an-http-request-becomes-a-view.markdown",
+		"/Users/Richard/richardrflores.github.io/_layouts/default.html",
+		"/Users/Richard/richardrflores.github.io/_posts/2014-10-18-improving-requirejs-setup-with-aspnet-mvc.markdown",
+		"/Users/Richard/richardrflores.github.io/content/site/images/setupMvcRequirejs.PNG",
+		"/Users/Richard/richardrflores.github.io/content/site/images/scriptsLayout.PNG",
+		"/Users/Richard/richardrflores.github.io/_posts/2014-07-21-recommended-readings-on-software-development.markdown",
+		"/Users/Richard/blog/_config.yml",
+		"/Users/Richard/blog/.gitignore",
+		"/Users/Richard/blog/_posts/2014-07-21-recommended-readings.markdown",
+		"/Users/Richard/blog/_includes/header.html",
+		"/Users/Richard/blog/_posts/2014-07-21-influential-books.markdown",
+		"/Users/Richard/blog/_drafts/2014-07-09-tdd-and-unit-testing-without-mocks.markdown",
+		"/Users/Richard/blog/_drafts/2014-06-13-in-my-own-words.markdown",
+		"/Users/Richard/blog/css/site.css",
+		"/Users/Richard/blog/_includes/head.html",
+		"/Users/Richard/blog/_plugins/category_archive_plugin.rb",
+		"/Users/Richard/blog/index.html",
+		"/Users/Richard/blog/_layouts/post.html",
+		"/Users/Richard/blog/categories/index.html",
+		"/Users/Richard/blog/_layouts/category_archive.html",
+		"/Users/Richard/blog/archives/index.html",
+		"/Users/Richard/blog/_layouts/default.html",
+		"/Users/Richard/blog/_posts/2014-06-13-in-my-own-words.markdown",
+		"/Users/Richard/Library/Application Support/Sublime Text 2/Packages/User/Yml Front Matter Snippet",
+		"/Users/Richard/Library/Application Support/Sublime Text 2/Packages/User/datetimestamp.py",
+		"/Users/Richard/blog/_drafts/draft-post.markdown",
+		"/Users/Richard/Library/Application Support/Sublime Text 2/Packages/User/hello",
+		"/etc/shells",
+		"/Users/Richard/blog/_site/css/site.css",
+		"/Users/Richard/blog/_site/css/main.css",
+		"/Users/Richard/blog/_posts/2014-05-20-late-night-hacking.markdown",
+		"/Users/Richard/blog/_site/blog/category/hacking/index.html",
+		"/Users/Richard/blog/_layouts/page.html",
+		"/Users/Richard/blog/_drafts/2014-05-19-welcome-to-jekyll.markdown",
+		"/Users/Richard/Desktop/backtrace",
+		"/Users/Richard/blog/about.md",
+		"/Users/Richard/blog/_site/hacking/2014/05/19/late-night-hacking/index.html",
+		"/Users/Richard/blog/_posts/2014-05-19-welcome-to-jekyll.markdown",
+		"/Users/Richard/Pictures/Profile Pics/me4.jpg",
+		"/Users/Richard/blog/css/main.css",
+		"/Users/Richard/blog/_includes/footer.html",
+		"/Users/Richard/blog/css/main",
+		"/Users/Richard/git-prompt.sh",
+		"/Users/Richard/Blog/richardrflores.github.io/blog/_config.yml",
+		"/Users/Richard/Desktop/dhgamache-Skeleton-7ab6820/index.html",
+		"/Users/Richard/Desktop/dhgamache-Skeleton-7ab6820/stylesheets/skeleton.css",
+		"/Users/Richard/RailsProjects/gnarlo/db/seeds.rb",
+		"/Users/Richard/RailsProjects/reprogram/config/application.yml",
+		"/Users/Richard/RailsProjects/reprogram/db/seeds.rb",
+		"/Users/Richard/RailsProjects/reprogram/app/views/devise/registrations/new.html.erb",
+		"/Users/Richard/RailsProjects/reprogram/app/views/devise/sessions/new.html.erb",
+		"/Users/Richard/RailsProjects/reprogram/app/views/devise/passwords/edit.html.erb",
+		"/Users/Richard/RailsProjects/reprogram/app/views/devise/unlocks/new.html.erb",
+		"/Users/Richard/RailsProjects/reprogram/app/views/devise/passwords/new.html.erb",
+		"/Users/Richard/RailsProjects/reprogram/app/views/devise/registrations/edit.html.erb",
+		"/Users/Richard/RailsProjects/reprogram/Gemfile",
+		"/Users/Richard/RailsProjects/reprogram/app/views/posts/_form.html.erb",
+		"/Users/Richard/RailsProjects/reprogram/app/assets/stylesheets/posts.css.scss",
+		"/Users/Richard/RailsProjects/reprogram/app/assets/stylesheets/application.css.scss",
+		"/Users/Richard/RailsProjects/gnarlo/config/initializers/rails_admin.rb",
+		"/Users/Richard/RailsProjects/gnarlo/app/models/post.rb",
+		"/Users/Richard/RailsProjects/gnarlo/db/schema.rb",
+		"/Users/Richard/RailsProjects/gnarlo/db/migrate/20130217161327_change_data_type_for_fieldname.rb",
+		"/Users/Richard/RailsProjects/gnarlo/db/migrate/20130216235829_create_posts.rb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/devise/sessions/new.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/assets/stylesheets/application.css.scss",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/devise/registrations/new.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/config/application.yml",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/devise/registrations/edit.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/devise/passwords/edit.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/devise/passwords/new.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/devise/confirmations/new.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/layouts/_navigation.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/layouts/application.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/home/index.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/posts/index.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/posts/new.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/posts/_form.html.erb",
+		"/Users/Richard/RailsProjects/gnarlo/app/views/posts/show.html.erb"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"#bd260d",
+			"lineno",
+			"li",
+			"side-nav",
+			"h1",
+			"oswald",
+			"h1",
+			"st_",
+			"rok",
+			"comment",
+			"h1",
+			"h2",
+			"admin",
+			"users/sign_in",
+			"sessions",
+			"submit",
+			"commit",
+			"alert",
+			"new_user",
+			"Remember me",
+			"Sign in",
+			"Sign iin",
+			"user_email",
+			"Sign in",
+			"button",
+			"sign in",
+			"ctrl+shift",
+			"called",
+			"messages",
+			"method_missing",
+			"instance_variables	",
+			"codeintel",
+			"window"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"data-st_",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"gem",
+				"Gemfile"
+			],
+			[
+				"application",
+				"config/application.rb"
+			],
+			[
+				"app",
+				"app/assets/stylesheets/application.css.scss"
+			],
+			[
+				"ge",
+				"Gemfile"
+			],
+			[
+				"develop",
+				"config/environments/development.rb"
+			],
+			[
+				"inde",
+				"index.html"
+			],
+			[
+				"main",
+				"css/main.css"
+			],
+			[
+				"index",
+				"index.html"
+			],
+			[
+				"to_str",
+				"about_to_str.rb"
+			],
+			[
+				"messa",
+				"about_message_passing.rb"
+			],
+			[
+				"aboutprox",
+				"about_proxy_object_project.rb"
+			],
+			[
+				"prox",
+				"about_proxy_object_project.rb"
+			],
+			[
+				"class",
+				"about_class_methods.rb"
+			],
+			[
+				"mess",
+				"about_message_passing.rb"
+			],
+			[
+				"scope",
+				"about_scope.rb"
+			],
+			[
+				"mo",
+				"about_modules.rb"
+			],
+			[
+				"about_mod",
+				"about_modules.rb"
+			],
+			[
+				"inhe",
+				"about_inheritance.rb"
+			],
+			[
+				"arra",
+				"about_arrays.rb"
+			],
+			[
+				"clas",
+				"about_classes.rb"
+			],
+			[
+				"ope",
+				"about_open_classes.rb"
+			],
+			[
+				"dice",
+				"about_dice_project.rb"
+			],
+			[
+				"open",
+				"about_open_classes.rb"
+			],
+			[
+				"scor",
+				"about_scoring_project.rb"
+			],
+			[
+				"san",
+				"about_sandwich_code.rb"
+			],
+			[
+				"bl",
+				"about_blocks.rb"
+			],
+			[
+				"exam",
+				"example_file.txt"
+			],
+			[
+				"iter",
+				"about_iteration.rb"
+			],
+			[
+				"about_exc",
+				"about_exceptions.rb"
+			],
+			[
+				"tr",
+				"triangle.rb"
+			],
+			[
+				"trin",
+				"about_triangle_project.rb"
+			],
+			[
+				"about_tr",
+				"about_true_and_false.rb"
+			],
+			[
+				"contro",
+				"about_control_statements.rb"
+			],
+			[
+				"cons",
+				"about_constants.rb"
+			],
+			[
+				"consta",
+				"about_control_statements.rb"
+			],
+			[
+				"regu",
+				"about_regular_expressions.rb"
+			],
+			[
+				"met",
+				"about_methods.rb"
+			],
+			[
+				"symb",
+				"about_symbols.rb"
+			],
+			[
+				"about_str",
+				"about_strings.rb"
+			],
+			[
+				"about_h",
+				"about_hashes.rb"
+			],
+			[
+				"about_arr",
+				"about_array_assignment.rb"
+			],
+			[
+				"about",
+				"about_arrays.rb"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 331.0,
+	"status_bar_visible": true
+}
