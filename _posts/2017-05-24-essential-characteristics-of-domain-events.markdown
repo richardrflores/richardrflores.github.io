@@ -1,5 +1,5 @@
 ---
-title: Essential Charachteristics Of Domain Events
+title: Essential Characteristics Of Domain Events
 layout: post
 date:   2017-05-24 09:24:00
 categories: [DDD]
