@@ -34,6 +34,10 @@ p {
 	font-size: .875rem;
 }
 
+ol, ul {
+	font-size: .875rem;	
+}
+
 /* Alignment */
 /* ----------------------------------------------------------*/
 .vert-space-below { margin-bottom: 10px; }
