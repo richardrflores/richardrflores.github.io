@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thinking In Event Streams</title>
+    <meta name="description" content="A blog about programming and software development by Richard Flores.">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300,700,|Oswald:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/normalize.css">
+  	<link rel="stylesheet" href="/css/foundation.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href="/feed.xml" type="application/rss+xml" rel="alternate" title="The Reprogram - Latest 10 blog posts (atom)">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/scripts/vendor/modernizr.js"></script>
+</head>
+
+    <body>
+
+    <!-- Nav Bar -->
+ <div class="site-header">
+  <div class="row">
+    <div class="large-12 columns">
+      <!-- <div class="nav-bar right">
+       <ul class="button-group">
+         <li><a href="#" class="button">Link 1</a></li>
+         <li><a href="#" class="button">Link 2</a></li>
+         <li><a href="#" class="button">Link 3</a></li>
+         <li><a href="#" class="button">Link 4</a></li>
+        </ul>
+      </div> -->
+      <h1><a href="/">The Reprogram </a><small>My blog about programming and software development.</small></h1>
+    </div>
+  </div>
+ </div>
+  <!-- End Nav -->
+
+ 
+  <!-- Main Page Content and Sidebar -->
+ 
+  <div class="row">
+ 
+    <!-- Main Blog Content -->
+
+    <div class="large-9 columns" role="content">
+      <h3><a href="#">Thinking In Event Streams</a></h3>
+<h6>Jul 15, 2017 &nbsp; posted in  <a href="/categories">Event Sourcing</a> </h6>
+
+<p></p> 
+<div class="row">
+	<div class="large-12 columns">
+    	<p>In a previous post on <a href="http://richardrflores.com/2017/05/08/event-sourcing.html">event sourcing</a>, I mentioned that there should be a compelling business need to use event sourcing, but how do we know it’s a suitable pattern? After talking to several colleagues I was introduced to the idea of thinking in event streams in order to figure out if event sourcing would be an appropriate given a new new project or adding to an existing solution. Jimmy Bogard commented on <a href="https://lostechies.com/gabrielschenker/2015/05/26/event-sourcing-revisited/">Event Sourcing Revisted</a> by Gabriel Schekner, in response to this same question. His process is to determine whether the business (not the developers) thinks and models their problem as a series of events, as a way of deciding to use an event sourced system. If we’re lucky the business will think about and actually model their system as a series of events. They might recognize events in their domain, but I don’t think it’s likely they would have the technical expertise to model the system as a stream of events without input from technical experts familiar with design of event based systems. So it’s up to us, not only be able to recognize events in the domain, but to transform those thoughts into event streams. So how do we get there? We need to start thinking in event streams!</p>
+
+<p>How do we make the switch? The first part is knowing what an event is. I describe the essential characteristics <a href="http://richardrflores.com/2017/05/24/essential-characteristics-of-domain-events.html">here</a>. Essentially and event is an effect resulting from some action. An important thing to recognize is that events describe non-trivial changes that occur in the domain. To illustrate, let’s look at an example from a billing application.</p>
+
+<p>When a charge is submitted to the system, then a charge is created. When a charge is created, then the system codes the charge. When the charge has been coded, then the system creates a journal entry. When a journal entry is created, then the system generates an invoice. When an invoice is created, then the system sends the customer an invoice.</p>
+
+<p>The process above is obviously a simple example, but we can guess that the domain at this point is a billing domain of some sort and we can see the non-trivial changes occurring in the domain as events:</p>
+
+<ul>
+  <li>ChargeCreated</li>
+  <li>ChargeCoded</li>
+  <li>JournalEntryCreated</li>
+  <li>InvoiceGenerated</li>
+</ul>
+
+<p>Now I’ve actually described several events that can occur in the billing domain. However, the key thing to note when identifying events is the tense. Events are always past-tense and each one is potentially an event stream in the system.</p>
+
+<p>Another, less apparent event stream is a domain change that occurs on an entity in the past. For example, in a billing service, where a new fee must be calculated from a given volume of product and a daily market rate, when the daily rate changed. If we knew the rate to be a given amount on the day the fee was first calculated, but was in-fact supposed to be a different amount and not detected until some time after, then we are dealing with a bi-temporal domain (what actually occurred vs. what was known). So if you have a non-trivial event happening in the context of a bi-temporal domain, then this is probably another potential event stream in the system. In the case the source of the event stream would be the DailyRateChanged event. This change would certainly influence the calculation of the fee, in this case it would result in a new fee being generated all together.</p>
+
+<p>Ok, great. I’ve shown you how to identify events that can occur in a notional billing system. But what actually makes them event streams? The term ‘event stream’ comes from event stream processing, which is loosely defined as the process of analyzing a flow of event-based data as it’s created. However, in the context of event sourcing, there is more to it. Not only must the events (the history they represent) be core to the business, but replaying events should also be core to the business. If the history is core to the business, say for regulatory requirements, and if replaying the event streams provides behavior that will influence a change to the domain, such as the case in the second example above, then I would say you have a legitimate event stream, thus a good case for event sourcing, but both elements should be present. Using event sourcing, for purely non-functional reasons (requirements), without buy-in from the business, delegitimizes the event stream and not a good case for using event sourcing in my opinion.</p>
+
+<p>In closing, what I’ve described in this post is “a way” to start thinking in event streams as a way to determine if event sourcing is a suitable pattern. We should be able to identify key events that are important to the business and transform them into event streams. However, the business should ultimately decide if the history of events and the need to replay them is core to the business. If so, then we have a legitimate event stream and a good case for using event sourcing. Once you have determined that event sourcing is an appropriate solution then you can use a more formal way of identifying events, called Event Storming which is a group modeling technique that involves all the key stakeholders, including the business. Checkout Alberto Ziobrando’s introduction to event-based modeling: <a href="http://ziobrando.blogspot.com/2013/11/introducing-event-storming.html">Introducing Event Storming</a> to learn more.</p>
+
+<p>Anything I might have missed? Any additional insights from interactions with stakeholders? If so, please share in the comments. I’d like to know more.</p>
+
+    </div>
+</div>
+<div class="row">
+	<div class="large-12 columns">
+        
+        <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.    
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2017/07/15/thinking-in-event-streams.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2017/07/15/thinking-in-event-streams'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://thereprogram.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+</div>
+    </div>
+ 
+    <!-- End Main Content -->
+ 
+    <!-- Sidebar -->
+ 
+    <aside class="large-3 columns">
+      <h5>About me</h5>
+      <img  alt="Profile pic" class="vert-space-below" src="/content/site/profile.jpg"></img>
+      <p>
+        Hi! I'm Richard Flores and I'm a software developer in Houston. <br>This is where I blog about my observations, experiences and opinions on programming and software development.
+      </p>
+      <h5><a href="/categories">categories</a></h5>
+      <h5><a href="/archives">archives</a></h5>
+      <a href="/feed.xml">
+        <img src="https://www.w3schools.com/xml/pic_rss.gif" width="36" height="14">
+      </a>
+    </aside> 
+    <!-- End Sidebar -->
+  </div>
+ 
+  <!-- End Main Content and Sidebar -->
+
+  <!-- Footer -->
+ 
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>© Copyright 2014 Richard Flores. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="/scripts/vendor/jquery.js"></script>
+    <script src="/scripts/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+    <script id="dsq-count-scr" src="//thereprogram.disqus.com/count.js" async></script>
+    </body>
+</html>

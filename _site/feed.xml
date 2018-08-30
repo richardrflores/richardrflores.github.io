@@ -7,7 +7,39 @@
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>Essential Charachteristics Of Domain Events</title>
+        <title>Thinking In Event Streams</title>
+        <description>&lt;p&gt;In a previous post on &lt;a href=&quot;http://richardrflores.com/2017/05/08/event-sourcing.html&quot;&gt;event sourcing&lt;/a&gt;, I mentioned that there should be a compelling business need to use event sourcing, but how do we know it’s a suitable pattern? After talking to several colleagues I was introduced to the idea of thinking in event streams in order to figure out if event sourcing would be an appropriate given a new new project or adding to an existing solution. Jimmy Bogard commented on &lt;a href=&quot;https://lostechies.com/gabrielschenker/2015/05/26/event-sourcing-revisited/&quot;&gt;Event Sourcing Revisted&lt;/a&gt; by Gabriel Schekner, in response to this same question. His process is to determine whether the business (not the developers) thinks and models their problem as a series of events, as a way of deciding to use an event sourced system. If we’re lucky the business will think about and actually model their system as a series of events. They might recognize events in their domain, but I don’t think it’s likely they would have the technical expertise to model the system as a stream of events without input from technical experts familiar with design of event based systems. So it’s up to us, not only be able to recognize events in the domain, but to transform those thoughts into event streams. So how do we get there? We need to start thinking in event streams!&lt;/p&gt;
+
+&lt;p&gt;How do we make the switch? The first part is knowing what an event is. I describe the essential characteristics &lt;a href=&quot;http://richardrflores.com/2017/05/24/essential-characteristics-of-domain-events.html&quot;&gt;here&lt;/a&gt;. Essentially and event is an effect resulting from some action. An important thing to recognize is that events describe non-trivial changes that occur in the domain. To illustrate, let’s look at an example from a billing application.&lt;/p&gt;
+
+&lt;p&gt;When a charge is submitted to the system, then a charge is created. When a charge is created, then the system codes the charge. When the charge has been coded, then the system creates a journal entry. When a journal entry is created, then the system generates an invoice. When an invoice is created, then the system sends the customer an invoice.&lt;/p&gt;
+
+&lt;p&gt;The process above is obviously a simple example, but we can guess that the domain at this point is a billing domain of some sort and we can see the non-trivial changes occurring in the domain as events:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ChargeCreated&lt;/li&gt;
+  &lt;li&gt;ChargeCoded&lt;/li&gt;
+  &lt;li&gt;JournalEntryCreated&lt;/li&gt;
+  &lt;li&gt;InvoiceGenerated&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now I’ve actually described several events that can occur in the billing domain. However, the key thing to note when identifying events is the tense. Events are always past-tense and each one is potentially an event stream in the system.&lt;/p&gt;
+
+&lt;p&gt;Another, less apparent event stream is a domain change that occurs on an entity in the past. For example, in a billing service, where a new fee must be calculated from a given volume of product and a daily market rate, when the daily rate changed. If we knew the rate to be a given amount on the day the fee was first calculated, but was in-fact supposed to be a different amount and not detected until some time after, then we are dealing with a bi-temporal domain (what actually occurred vs. what was known). So if you have a non-trivial event happening in the context of a bi-temporal domain, then this is probably another potential event stream in the system. In the case the source of the event stream would be the DailyRateChanged event. This change would certainly influence the calculation of the fee, in this case it would result in a new fee being generated all together.&lt;/p&gt;
+
+&lt;p&gt;Ok, great. I’ve shown you how to identify events that can occur in a notional billing system. But what actually makes them event streams? The term ‘event stream’ comes from event stream processing, which is loosely defined as the process of analyzing a flow of event-based data as it’s created. However, in the context of event sourcing, there is more to it. Not only must the events (the history they represent) be core to the business, but replaying events should also be core to the business. If the history is core to the business, say for regulatory requirements, and if replaying the event streams provides behavior that will influence a change to the domain, such as the case in the second example above, then I would say you have a legitimate event stream, thus a good case for event sourcing, but both elements should be present. Using event sourcing, for purely non-functional reasons (requirements), without buy-in from the business, delegitimizes the event stream and not a good case for using event sourcing in my opinion.&lt;/p&gt;
+
+&lt;p&gt;In closing, what I’ve described in this post is “a way” to start thinking in event streams as a way to determine if event sourcing is a suitable pattern. We should be able to identify key events that are important to the business and transform them into event streams. However, the business should ultimately decide if the history of events and the need to replay them is core to the business. If so, then we have a legitimate event stream and a good case for using event sourcing. Once you have determined that event sourcing is an appropriate solution then you can use a more formal way of identifying events, called Event Storming which is a group modeling technique that involves all the key stakeholders, including the business. Checkout Alberto Ziobrando’s introduction to event-based modeling: &lt;a href=&quot;http://ziobrando.blogspot.com/2013/11/introducing-event-storming.html&quot;&gt;Introducing Event Storming&lt;/a&gt; to learn more.&lt;/p&gt;
+
+&lt;p&gt;Anything I might have missed? Any additional insights from interactions with stakeholders? If so, please share in the comments. I’d like to know more.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Jul 2017 08:15:19 -0500</pubDate>
+        <link>http://localhost:4000/2017/07/15/thinking-in-event-streams.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/15/thinking-in-event-streams.html</guid>
+      </item>
+    
+      <item>
+        <title>Essential Characteristics Of Domain Events</title>
         <description>&lt;p&gt;In my post on &lt;a href=&quot;http://richardrflores.com/2017/05/08/event-sourcing.html&quot;&gt;event sourcing&lt;/a&gt;, I briefly described event sourcing and touched on appropriate usages. I’m planning on writing some more about usages, but for now I wanted to share my notes on the fundamental thing we are dealing with when using event sourcing—Events.&lt;/p&gt;
 
 &lt;p&gt;The essential characteristics of events are:&lt;/p&gt;
@@ -20,8 +52,8 @@
 &lt;/ul&gt;
 </description>
         <pubDate>Wed, 24 May 2017 04:24:00 -0500</pubDate>
-        <link>http://localhost:4000/2017/05/24/essential-charachteristics-of-domain-events.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/05/24/essential-charachteristics-of-domain-events.html</guid>
+        <link>http://localhost:4000/2017/05/24/essential-characteristics-of-domain-events.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/24/essential-characteristics-of-domain-events.html</guid>
       </item>
     
       <item>
@@ -247,87 +279,6 @@
         <pubDate>Wed, 18 Mar 2015 09:14:00 -0500</pubDate>
         <link>http://localhost:4000/2015/03/18/demon-hunter-level-12.html</link>
         <guid isPermaLink="true">http://localhost:4000/2015/03/18/demon-hunter-level-12.html</guid>
-      </item>
-    
-      <item>
-        <title>Improving setup of ASP.NET MVC application with RequireJS and KnockoutJS</title>
-        <description>&lt;p&gt;In this post I want to improve upon the setup I covered in the previous post &lt;a href=&quot;/2014/09/16/setting-up-requirejs-with-aspnet-mvc.html&quot;&gt;Setting up an ASP.NET MVC application with RequireJS and KnockoutJS&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I wasn’t crazy about having to implement the ‘@Html.InitPageMainModule()’ helper in every view to setup the page module. I do like that it’s declarative, but ultimately it’s unnecessary.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;@using RequireKoPlayground.Extensions
-@{
-    ViewBag.Title = &quot;Index&quot;;
-}
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;@ViewBag.Greeting&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-    Enter your name? &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;textInput: name&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-    Your name is:
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text: name&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-
-@section scripts
-{
-    @Html.InitPageMainModule(&quot;index&quot;)
-}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;To improve upon this we can take advantage of the HttpContext.Current.Request and VirtualPathUtility to get the path and file name of the view we want to define a module for.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c#&quot; data-lang=&quot;c#&quot;&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System.Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System.Web&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System.Web.Mvc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;RequireKoPlayground.Extensions&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequireJsHelpers&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MvcHtmlString&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;InitPageMainModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HtmlHelper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;helper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;StringBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scriptsPath&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;~/Scripts/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;absolutePath&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VirtualPathUtility&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToAbsolute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scriptsPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modulePath&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Controllers/{0}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;helper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ViewContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RouteData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;controller&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathstring&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FilePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pageModule&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VirtualPathUtility&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetFileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pathstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-            &lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AppendLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;script&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AppendFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;require(['{0}main.js'], &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;absolutePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AppendFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;function() { require(['{0}/{1}', 'domReady']); }&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modulePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pageModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AppendLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;);&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AppendLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;/script&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MvcHtmlString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;We no longer have to pass in the name of the view as we were doing previously and can remove the call to the RequireJsHelper in our view and place it in the layout of the web application.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;@using RequireKoPlayground.Extensions
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width=device-width, initial-scale=1.0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Require KO Playground&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;section&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            @RenderBody()
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/section&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;~/Scripts/lib/require.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-        @Html.InitPageMainModule()
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;So long as you stick to the controller convention for your modules described in the first post, this should just work.&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 09 Dec 2014 15:56:25 -0600</pubDate>
-        <link>http://localhost:4000/2014/12/09/improving-requirejs-setup-with-aspnet-mvc.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2014/12/09/improving-requirejs-setup-with-aspnet-mvc.html</guid>
       </item>
     
   </channel>
