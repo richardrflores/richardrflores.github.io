@@ -7,6 +7,27 @@
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Scalability: What does it really mean?</title>
+        <description>&lt;p&gt;The term “scalability” is often included in the list of quality attributes when making key architectural decisions, but what does it really mean? Scalability is a non-functional requirement that refers to the ability of an application to maintain an optimal level of performance as usage increases. Achieving this ability might seem pretty straight forward but depending on the architecture of a particular software scalability can mean different things.&lt;/p&gt;
+
+&lt;p&gt;Typically, when we talk about scaling, we are talking about scaling up, also known as vertical scaling, which is the application of additional resources to a software application, such as cpu, memory, storage and network speed. It’s easy to understand how an application can benefit from this type of scaling but, when we are talking about systems, distributed systems to be more specific, then we are usually talking about scaling out, known also as horizontal scaling. This can be done a few ways.&lt;/p&gt;
+
+&lt;p&gt;The first way is achieved by design since distributed systems are made up of a collection of abstract services that operate independent of one-another but cooperate in a workflow to complete some desired business functionality. With this type of architecture systems are inherently scalable because the functionality of the system is spread out across its various components.&lt;/p&gt;
+
+&lt;p&gt;Another way systems can be scaled out is by deploying its individual services as nodes, onto multiple servers, in order to balance their use across the servers. This has the added benefit of vertically scaling each server independently.&lt;/p&gt;
+
+&lt;p&gt;Yet another way is to create specialized components within a service boundary in order to meet quality of service requirements by customer type, such as regular customers versus strategic customers. Or, by product type, such as perishable products versus non-perishable products. The idea here is to have individual components that can be optimized based on a given business scenario.&lt;/p&gt;
+
+&lt;p&gt;So, when you are tasked with designing an application or system to be scalable you now know what scalability actually means now or at least have some additional information to explore further.&lt;/p&gt;
+
+&lt;p&gt;Is there anything I might have missed? Do you have anything to share that would make this post more useful? Please feel free to comment below.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 01 Sep 2018 10:30:00 -0500</pubDate>
+        <link>http://localhost:4000/2018/09/01/scalability-what-does-it-really-mean.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/09/01/scalability-what-does-it-really-mean.html</guid>
+      </item>
+    
+      <item>
         <title>Thinking In Event Streams</title>
         <description>&lt;p&gt;In a previous post on &lt;a href=&quot;http://richardrflores.com/2017/05/08/event-sourcing.html&quot;&gt;event sourcing&lt;/a&gt;, I mentioned that there should be a compelling business need to use event sourcing, but how do we know it’s a suitable pattern? After talking to several colleagues I was introduced to the idea of thinking in event streams in order to figure out if event sourcing would be an appropriate given a new new project or adding to an existing solution. Jimmy Bogard commented on &lt;a href=&quot;https://lostechies.com/gabrielschenker/2015/05/26/event-sourcing-revisited/&quot;&gt;Event Sourcing Revisted&lt;/a&gt; by Gabriel Schekner, in response to this same question. His process is to determine whether the business (not the developers) thinks and models their problem as a series of events, as a way of deciding to use an event sourced system. If we’re lucky the business will think about and actually model their system as a series of events. They might recognize events in their domain, but I don’t think it’s likely they would have the technical expertise to model the system as a stream of events without input from technical experts familiar with design of event based systems. So it’s up to us, not only be able to recognize events in the domain, but to transform those thoughts into event streams. So how do we get there? We need to start thinking in event streams!&lt;/p&gt;
 
@@ -270,15 +291,6 @@
         <pubDate>Wed, 18 Mar 2015 09:30:00 -0500</pubDate>
         <link>http://localhost:4000/2015/03/18/coercion-of-types-soft-casting.html</link>
         <guid isPermaLink="true">http://localhost:4000/2015/03/18/coercion-of-types-soft-casting.html</guid>
-      </item>
-    
-      <item>
-        <title>Demon hunter level 12</title>
-        <description>&lt;p&gt;Warnings in code. Use warnings in code when a challenging section of code has been implemented. Should be in a comment banner and say something like…”If you are not do not have these skills (Demon hunter level 12) then you should probably not be modifying this code!”&lt;/p&gt;
-</description>
-        <pubDate>Wed, 18 Mar 2015 09:14:00 -0500</pubDate>
-        <link>http://localhost:4000/2015/03/18/demon-hunter-level-12.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/03/18/demon-hunter-level-12.html</guid>
       </item>
     
   </channel>

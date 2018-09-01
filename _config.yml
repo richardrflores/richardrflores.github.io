@@ -11,3 +11,7 @@ category_archive:
 # Build settings
 markdown: kramdown
 permalink: /:year/:month/:day/:title.html
+
+# This will require each of these plugins automatically.
+gems:
+  - jekyll-admin

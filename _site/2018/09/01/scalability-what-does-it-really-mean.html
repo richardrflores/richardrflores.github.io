@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scalability: What does it really mean?</title>
+    <meta name="description" content="A blog about programming and software development by Richard Flores.">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300,700,|Oswald:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/normalize.css">
+  	<link rel="stylesheet" href="/css/foundation.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href="/feed.xml" type="application/rss+xml" rel="alternate" title="The Reprogram - Latest 10 blog posts (atom)">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/scripts/vendor/modernizr.js"></script>
+</head>
+
+    <body>
+
+    <!-- Nav Bar -->
+ <div class="site-header">
+  <div class="row">
+    <div class="large-12 columns">
+      <!-- <div class="nav-bar right">
+       <ul class="button-group">
+         <li><a href="#" class="button">Link 1</a></li>
+         <li><a href="#" class="button">Link 2</a></li>
+         <li><a href="#" class="button">Link 3</a></li>
+         <li><a href="#" class="button">Link 4</a></li>
+        </ul>
+      </div> -->
+      <h1><a href="/">The Reprogram </a><small>My blog about programming and software development.</small></h1>
+    </div>
+  </div>
+ </div>
+  <!-- End Nav -->
+
+ 
+  <!-- Main Page Content and Sidebar -->
+ 
+  <div class="row">
+ 
+    <!-- Main Blog Content -->
+
+    <div class="large-9 columns" role="content">
+      <h3><a href="#">Scalability: What does it really mean?</a></h3>
+<h6>Sep 1, 2018 &nbsp; posted in  <a href="/categories">Design</a>  <a href="/categories">Architecture</a>  <a href="/categories">SOA</a> </h6>
+
+<p></p> 
+<div class="row">
+	<div class="large-12 columns">
+    	<p>The term “scalability” is often included in the list of quality attributes when making key architectural decisions, but what does it really mean? Scalability is a non-functional requirement that refers to the ability of an application to maintain an optimal level of performance as usage increases. Achieving this ability might seem pretty straight forward but depending on the architecture of a particular software scalability can mean different things.</p>
+
+<p>Typically, when we talk about scaling, we are talking about scaling up, also known as vertical scaling, which is the application of additional resources to a software application, such as cpu, memory, storage and network speed. It’s easy to understand how an application can benefit from this type of scaling but, when we are talking about systems, distributed systems to be more specific, then we are usually talking about scaling out, known also as horizontal scaling. This can be done a few ways.</p>
+
+<p>The first way is achieved by design since distributed systems are made up of a collection of abstract services that operate independent of one-another but cooperate in a workflow to complete some desired business functionality. With this type of architecture systems are inherently scalable because the functionality of the system is spread out across its various components.</p>
+
+<p>Another way systems can be scaled out is by deploying its individual services as nodes, onto multiple servers, in order to balance their use across the servers. This has the added benefit of vertically scaling each server independently.</p>
+
+<p>Yet another way is to create specialized components within a service boundary in order to meet quality of service requirements by customer type, such as regular customers versus strategic customers. Or, by product type, such as perishable products versus non-perishable products. The idea here is to have individual components that can be optimized based on a given business scenario.</p>
+
+<p>So, when you are tasked with designing an application or system to be scalable you now know what scalability actually means now or at least have some additional information to explore further.</p>
+
+<p>Is there anything I might have missed? Do you have anything to share that would make this post more useful? Please feel free to comment below.</p>
+
+    </div>
+</div>
+<div class="row">
+	<div class="large-12 columns">
+        
+        <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.    
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = 'http://localhost:4000/2018/09/01/scalability-what-does-it-really-mean.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2018/09/01/scalability-what-does-it-really-mean'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://thereprogram.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+</div>
+    </div>
+ 
+    <!-- End Main Content -->
+ 
+    <!-- Sidebar -->
+ 
+    <aside class="large-3 columns">
+      <h5>About me</h5>
+      <img  alt="Profile pic" class="vert-space-below" src="/content/site/profile.jpg"></img>
+      <p>
+        Hi! I'm Richard Flores and I'm a software developer in Houston. <br>This is where I blog about my observations, experiences and opinions on programming and software development.
+      </p>
+      <h5><a href="/categories">categories</a></h5>
+      <h5><a href="/archives">archives</a></h5>
+      <a href="/feed.xml">
+        <img src="https://www.w3schools.com/xml/pic_rss.gif" width="36" height="14">
+      </a>
+    </aside> 
+    <!-- End Sidebar -->
+  </div>
+ 
+  <!-- End Main Content and Sidebar -->
+
+  <!-- Footer -->
+ 
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>© Copyright 2014 Richard Flores. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="/scripts/vendor/jquery.js"></script>
+    <script src="/scripts/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+    <script id="dsq-count-scr" src="//thereprogram.disqus.com/count.js" async></script>
+    </body>
+</html>
