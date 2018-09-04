@@ -19,9 +19,15 @@ Typically, when we talk about scaling, we are talking about scaling up, also kno
 
 The first way is achieved by design since distributed systems are made up of a collection of abstract services that operate independent of one-another but cooperate in a workflow to complete some desired business functionality. With this type of architecture systems are inherently scalable because the functionality of the system is spread out across its various components. 
 
+![Scale out by architecture]({{ "/content/site/images/scale_by_architecture.png" | prepend: site.baseurl }} "Scale out by architecture"){: .center-image }
+
 Another way systems can be scaled out is by deploying its individual services as nodes, onto multiple servers, in order to balance their use across the servers. This has the added benefit of vertically scaling each server independently. 
 
+![Scale out by nodes]({{ "/content/site/images/scale_by_node.png" | prepend: site.baseurl }} "Scale out by nodes"){: .center-image }
+
 Yet another way is to create specialized components within a service boundary in order to meet quality of service requirements by customer type, such as regular customers versus strategic customers. Or, by product type, such as perishable products versus non-perishable products. The idea here is to have individual components that can be optimized based on a given business scenario.
+
+![Scale out by specialized component]({{ "/content/site/images/scale_by_specialty.png" | prepend: site.baseurl }} "Scale out by specialized component"){: .center-image }
 
 So, when you are tasked with designing an application or system to be scalable you now know what scalability actually means now or at least have some additional information to explore further.
 

@@ -44,6 +44,11 @@ ol, ul {
 
 /* Layout */
 /* ----------------------------------------------------------*/
+.center-image
+{
+    margin: 0 auto;
+    display: block;
+}
 
 /* Site header */
 
